@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Dropdown, Avatar } from 'antd'
-import { withRouter } from 'react-router'
 import {
   MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined 
+  MenuFoldOutlined
 } from '@ant-design/icons';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import './topheader.css'
 const { Header } = Layout;
 
 class Topheader extends Component {
@@ -41,7 +42,7 @@ class Topheader extends Component {
             </Menu.Item>
         </Menu>
     )
-  }
+  }  
   render() {
     return (
       <Header className="site-layout-background" style={{ padding: 0 }}>
@@ -65,4 +66,19 @@ class Topheader extends Component {
   }
 }
 
-export default withRouter(Topheader)
+const mapStateToProps = state=>{
+  return () => {
+    this.props.actionCreator(this.state.collapsed)
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : (data)=>{
+    return {
+      type:'MySideMenuCollapsed',
+      payload:data
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Topheader))
