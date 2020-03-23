@@ -53,20 +53,18 @@ export default class Login extends Component {
     onFinish = values => {
       axios({
         url: `http://localhost:12138/users?username=${values.username}&
-            password=${ values.password}&roleState=true`,
+            password=${values.password}&roleState=true`,
         method: 'get'
       }).then(res => {
           if (  res.data.length )  {
-              message.success('登录成功')
+
+            message.success('登录成功')
               
-          let user = window.btoa(encodeURIComponent(JSON.stringify({
-            username: res.data[0].username,
-            roleName: res.data[0].roleName,
-            roleType: res.data[0].roleType,
-          })))
-          // 解码：decodeURIComponent(window.atob(user))
+            let user = window.btoa(encodeURIComponent(JSON.stringify(res.data[0])))
           
-            localStorage.setItem('token', user)
+            // 解码：decodeURIComponent(window.atob(user))
+            localStorage.setItem('users', user)
+            localStorage.setItem('token', true)
 
             this.props.history.push('/cma')
 

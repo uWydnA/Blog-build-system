@@ -12,7 +12,7 @@ const { Header } = Layout;
 class Topheader extends Component {
   state = {
     collapsed: false,
-    token: {}
+    users: {}
   }
   toggle = () => {
     this.setState({
@@ -22,10 +22,10 @@ class Topheader extends Component {
     })
   }
   componentDidMount () {
-    let token = localStorage.getItem('token')
-
+    let users = localStorage.getItem('users')
+    console.log(JSON.parse(decodeURIComponent(window.atob(users))))
     this.setState({
-      token: JSON.parse(decodeURIComponent(window.atob(token)))
+      users: JSON.parse(decodeURIComponent(window.atob(users)))
     })
   }
   //下拉菜单
@@ -34,7 +34,7 @@ class Topheader extends Component {
         <Menu>
             <Menu.Item>
                 <div>
-                    {this.state.token.roleName}
+                    {this.state.users.roleName}
                 </div>
             </Menu.Item>
             <Menu.Item>
@@ -54,7 +54,7 @@ class Topheader extends Component {
           })}
 
           <div style={ {float:'right',padding:'0 10px'} }>
-              欢迎{this.state.token.username}回来！
+              欢迎{this.state.users.username}回来！
               <Dropdown overlay={ this.menu() }>
                   <Avatar size="large" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3705382457,1208323352&fm=26&gp=0.jpg" />
               </Dropdown>
