@@ -10,6 +10,7 @@ import Update from './articleManage/update/Update'
 import Home from './Home/home'
 import Sidebar from './sidebar/Sidebar'
 import Topheader from './topheader/Topheader'
+import AddArticle from './articleManage/addArticle/AddArticle'
 import './Cma.css'
 import { Layout } from 'antd';
 const { Content } = Layout;
@@ -42,9 +43,10 @@ export default class Cma extends Component {
                   </RightManage>
                 )}></Route>
                 <Route path='/cma/article-manage/list' component={List}></Route>
-                <Route path='/cma/article-manage/update:id' component={Update}></Route>
-                <Route path='/cma/article-manage/preview:id' component={Preview}></Route>
-                <Redirect to='/cma/home' exact></Redirect>
+                <Route path='/cma/article-manage/update/:id' component={Update}></Route>
+                <Route path='/cma/article-manage/preview/:id' component={Preview}></Route>
+                <Route path='/cma/article-manage/addArticle' component={AddArticle}></Route>
+                <Redirect  to='/cma/home' exact></Redirect>
               </Switch>
             </Content>
           </Layout>

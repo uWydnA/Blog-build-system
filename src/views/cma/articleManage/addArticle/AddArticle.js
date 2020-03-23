@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
-import './update.css'
 import { PageHeader, Steps, Button, message, Input, Form, Select } from 'antd';
 import RichEditor from '../richEditor/RichEditor'
 const { Step } = Steps;
 const { Option } = Select;
 export default class Update extends Component {
   componentWillMount() {
-    React.$axios.get(`http://localhost:12138/articles/${this.props.match.params.id}`)
-      .then(res => {
-        this.setState({
-          data: res.data,
-          content:res.data.content
-        },()=>{
-         this.refs.updateForm.setFieldsValue(this.state.data)
-        })
-      })
     React.$axios.get(`http://localhost:12138/categories`)
       .then(res => {
         this.setState({
@@ -68,14 +58,14 @@ export default class Update extends Component {
     })
   }
   submit = ()=>{
-    React.$axios.put(`http://localhost:12138/articles/${this.props.match.params.id}`,{
+    React.$axios.post(`http://localhost:12138/articles`,{
       ...this.state.categoryData,
       content:this.state.content,
       author: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].username,
       roleType: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].roleType,
     })
     .then(res=>{
-      message.success('更新成功')
+      message.success('添加成功')
       this.props.history.push('/cma/article-manage/list')
     })
   }
@@ -143,7 +133,7 @@ export default class Update extends Component {
             </Form>
           }</div>
           <div className="steps-content" style={{ display: this.state.current === 1 ? 'block' : 'none' }}>
-            <RichEditor genContent={this.genContent} htmlContent={this.state.content} key={this.state.content}></RichEditor>
+            <RichEditor genContent={this.genContent} ></RichEditor>
           </div>
           <div className="steps-content" style={{ display: this.state.current === 2 ? 'block' : 'none' }}></div>
           <div className="steps-action">
