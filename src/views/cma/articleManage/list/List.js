@@ -30,6 +30,11 @@ export default class List extends Component {
         key: 'tag',
       },
       {
+        title: '提交时间',
+        dataIndex: 'time',
+        key: 'time',
+      },
+      {
         title: '操作',
         key: 'action',
         render: (val, item) => (

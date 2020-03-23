@@ -136,6 +136,13 @@ export default class Update extends Component {
 
                 </Select>
               </Form.Item>
+              <Form.Item
+                label="提交时间"
+                name="time"
+                rules={[{ required: true, message: '请输入你的提交时间' }]}
+              >
+                <Input />
+              </Form.Item>
             </Form>
           }</div>
           <div className="steps-content" style={{ display: this.state.current === 1 ? 'block' : 'none' }}>
