@@ -27,7 +27,7 @@ export default class Update extends Component {
       },
     ],
     current: 0,
-    content:'',
+    content: '',
     categoryData: {}
   }
   next = () => {
@@ -42,7 +42,7 @@ export default class Update extends Component {
             this.setState({ current });
           }
         })
-      return ;
+      return;
     }
     const current = this.state.current + 1;
     this.setState({ current });
@@ -52,22 +52,22 @@ export default class Update extends Component {
     const current = this.state.current - 1;
     this.setState({ current });
   }
-  genContent = (data)=>{
+  genContent = (data) => {
     this.setState({
-      content:data
+      content: data
     })
   }
-  submit = ()=>{
-    React.$axios.post(`http://localhost:12138/articles`,{
+  submit = () => {
+    React.$axios.post(`http://localhost:12138/articles`, {
       ...this.state.categoryData,
-      content:this.state.content,
+      content: this.state.content,
       author: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].username,
       roleType: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].roleType,
     })
-    .then(res=>{
-      message.success('添加成功')
-      this.props.history.push('/cma/article-manage/list')
-    })
+      .then(res => {
+        message.success('添加成功')
+        this.props.history.push('/cma/article-manage/list')
+      })
   }
   render() {
     const layout = {
@@ -108,7 +108,13 @@ export default class Update extends Component {
               >
                 <Input />
               </Form.Item>
-
+              <Form.Item
+                label="文章标签"
+                name="tag"
+                rules={[{ required: true, message: '请输入你的文章标签' }]}
+              >
+                <Input />
+              </Form.Item>
               <Form.Item
                 label="文章分类"
                 name="category"
@@ -130,6 +136,13 @@ export default class Update extends Component {
 
                 </Select>
               </Form.Item>
+              <Form.Item
+                label="提交时间"
+                name="time"
+                rules={[{ required: true, message: '请输入你的提交时间' }]}
+              >
+                <Input />
+              </Form.Item>
             </Form>
           }</div>
           <div className="steps-content" style={{ display: this.state.current === 1 ? 'block' : 'none' }}>
@@ -143,7 +156,7 @@ export default class Update extends Component {
               </Button>
             )}
             {this.state.current === this.state.steps.length - 1 && (
-              <Button type="primary" onClick={() => {this.submit()}}>
+              <Button type="primary" onClick={() => { this.submit() }}>
                 提交
               </Button>
             )}

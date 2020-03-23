@@ -29,11 +29,14 @@ class Sidebar extends Component {
           }
         </SubMenu>
         :
-        <Menu.Item key={val.path}>
+        <Menu.Item key={val.path} onClick={this.handleClick}>
           <val.icon />
-          <NavLink to={val.path}><span>{val.title}</span></NavLink>
+          <span>{val.title}</span>
         </Menu.Item>
     ))
+  }
+  handleClick = (item)=>{
+    this.props.history.push(item.key);
   }
   render() {
     return (

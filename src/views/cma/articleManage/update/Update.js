@@ -118,7 +118,13 @@ export default class Update extends Component {
               >
                 <Input />
               </Form.Item>
-
+              <Form.Item
+                label="文章标签"
+                name="tag"
+                rules={[{ required: true, message: '请输入你的文章标签' }]}
+              >
+                <Input />
+              </Form.Item>
               <Form.Item
                 label="文章分类"
                 name="category"
@@ -139,6 +145,13 @@ export default class Update extends Component {
                   }
 
                 </Select>
+              </Form.Item>
+              <Form.Item
+                label="提交时间"
+                name="time"
+                rules={[{ required: true, message: '请输入你的提交时间' }]}
+              >
+                <Input />
               </Form.Item>
             </Form>
           }</div>
