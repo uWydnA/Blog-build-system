@@ -4,14 +4,19 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import './topheader.css'
 const { Header } = Layout;
-export default class Topheader extends Component {
+class Topheader extends Component {
   state = {
     collapsed: false,
   }
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
+    },()=>{
+      this.props.actionCreator(this.state.collapsed)
     });
   }
   render() {
@@ -25,3 +30,20 @@ export default class Topheader extends Component {
     )
   }
 }
+
+const mapStateToProps = state=>{
+  return {
+
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : (data)=>{
+    return {
+      type:'MySideMenuCollapsed',
+      payload:data
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Topheader))

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {NavLink, withRouter} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
+import {connect} from 'react-redux'
 import menu from '../../../router/menu'
 const {SubMenu} = Menu
 const { Sider } = Layout;
@@ -10,15 +11,6 @@ class Sidebar extends Component {
       menulist: menu.superAdmin
     })
     React.$axios.get("http://localhost:12138/")
-  }
-
-  state = {
-    collapsed: false,
-  }
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
   }
   showList = (data) => {
     return data.map((val, index) => (
@@ -45,7 +37,7 @@ class Sidebar extends Component {
   }
   render() {
     return (
-      <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+      <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultOpenKeys={['/' + this.props.location.pathname.split('/')[1] + '/' + this.props.location.pathname.split('/')[2]]} selectedKeys={[this.props.location.pathname]}>
           {
@@ -57,4 +49,10 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(Sidebar)
+const mapStateToProps = state=>{
+  return {
+    collapsed : state.isCollapsed
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Sidebar))
