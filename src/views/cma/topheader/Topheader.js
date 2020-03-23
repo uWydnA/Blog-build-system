@@ -17,6 +17,8 @@ class Topheader extends Component {
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
+    }, () => {
+      this.props.actionCreator(this.state.collapsed)
     })
   }
   componentDidMount () {
@@ -67,8 +69,8 @@ class Topheader extends Component {
 }
 
 const mapStateToProps = state=>{
-  return () => {
-    this.props.actionCreator(this.state.collapsed)
+  return {
+
   }
 }
 
@@ -81,4 +83,4 @@ const mapDispatchToProps = {
   }
 }
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Topheader))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Topheader))
