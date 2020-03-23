@@ -25,6 +25,11 @@ export default class List extends Component {
         key: 'category',
       },
       {
+        title: '文章标签',
+        dataIndex: 'tag',
+        key: 'tag',
+      },
+      {
         title: '操作',
         key: 'action',
         render: (val, item) => (
