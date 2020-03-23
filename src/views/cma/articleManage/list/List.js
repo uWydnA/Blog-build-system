@@ -64,7 +64,7 @@ export default class List extends Component {
         })
       })
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     React.$axios.get('http://localhost:12138/articles')
       .then(res => {
         this.setState({

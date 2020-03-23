@@ -5,7 +5,7 @@ import RichEditor from '../richEditor/RichEditor'
 const { Step } = Steps;
 const { Option } = Select;
 export default class Update extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     React.$axios.get(`http://localhost:12138/articles/${this.props.match.params.id}`)
       .then(res => {
         this.setState({
@@ -71,8 +71,8 @@ export default class Update extends Component {
     React.$axios.put(`http://localhost:12138/articles/${this.props.match.params.id}`,{
       ...this.state.categoryData,
       content:this.state.content,
-      author: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].username,
-      roleType: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users'))))[0].roleType,
+      author: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users')))).username,
+      roleType: JSON.parse(decodeURIComponent(atob(localStorage.getItem('users')))).roleType,
     })
     .then(res=>{
       message.success('更新成功')

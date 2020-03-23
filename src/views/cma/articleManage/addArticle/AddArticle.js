@@ -4,7 +4,7 @@ import RichEditor from '../richEditor/RichEditor'
 const { Step } = Steps;
 const { Option } = Select;
 export default class Update extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     React.$axios.get(`http://localhost:12138/categories`)
       .then(res => {
         this.setState({
