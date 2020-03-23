@@ -10,7 +10,6 @@ export default class BlogRouter extends Component {
         <Switch>
           <Route path='/login' component={Login}></Route>
           <Route path='/cma' render={()=>{
-            localStorage.setItem("token",true) //方便开发使用，后续需要删除
             return (
               localStorage.getItem('token')?
               <Cma></Cma>
