@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Layout } from 'antd';
 import Navbar from './navbar/Navbar'
 import './Blog.css'
-import Home from './home/Home'
 import {connect} from 'react-redux'
 
 class Blog extends Component {
