@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Input } from 'antd';
 import './navbar.css'
 import { withRouter } from 'react-router-dom';
 import {
@@ -10,6 +10,7 @@ import {
   CommentOutlined
 
 } from '@ant-design/icons';
+const { Search } = Input;
 const { Header } = Layout;
 const { SubMenu } = Menu;
 class Navbar extends Component {
@@ -17,7 +18,8 @@ class Navbar extends Component {
     this.props.history.push(item.key)
   }
   state = {
-    cataList: []
+    cataList: [],
+    isFocused:false
   }
   componentWillMount() {
     React.$axios.get('http://localhost:12138/articles')
@@ -27,8 +29,18 @@ class Navbar extends Component {
         })
       })
   }
-  subHandle = val=>{
+  subHandle = val => {
     this.props.history.push(`/category/${val}`)
+  }
+  focusSearch =()=>{
+    this.setState({
+      isFocused:true
+    })
+  }
+  blurSearch = ()=>{
+    this.setState({
+      isFocused:false
+    })
   }
   render() {
     return (
@@ -59,7 +71,7 @@ class Navbar extends Component {
               >
                 {
                   this.state.cataList.map(val => (
-                    <Menu.Item key={val} onClick={this.subHandle.bind(this,val)}>{val}</Menu.Item>
+                    <Menu.Item key={val} onClick={this.subHandle.bind(this, val)}>{val}</Menu.Item>
                   ))
                 }
               </SubMenu>
@@ -83,6 +95,16 @@ class Navbar extends Component {
                 <Menu.Item key='博客园'>博客园</Menu.Item>
               </SubMenu>
             </Menu>
+          </div>
+          <div className='search'>
+            <Search
+              ref='search'
+              onFocus={this.focusSearch}
+              onBlur={this.blurSearch}
+              onSearch={value => console.log(value)}
+              className={this.state.isFocused?'foucsSearch':'blurSearch'}
+              style={{ width: 200 }}
+            />
           </div>
         </Header>
       </div>
