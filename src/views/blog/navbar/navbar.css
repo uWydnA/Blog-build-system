@@ -10,7 +10,9 @@
   font-weight: 600;
   font-size: 1.2rem;
 }
-
+.blogHeader .changeTheme {
+  float: right
+}
 .blogHeader .foucsSearch {
   float: right;
  
@@ -22,6 +24,39 @@
   padding:4px 11px;
   height: 32px;
   margin:16px
+}
+.searchDemo{
+  position: absolute;
+  width: 300px;
+  background-color: #202124;
+  color:#fff;
+  top: 64px;
+  left:350px;
+  border:1px solid #fff;
+  margin:0;
+  padding:0;
+  z-index:111
+}
+.searchDemo li{
+  list-style: none;
+  margin:5px;
+  padding:5px;
+  font-size: .8rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.searchDemo li:hover{
+  background-color: #161719;
+  color:#37936A
+}
+
+.blogHeader .ant-popover-inner{
+  background-color: #202124;
+}
+.blogHeader .ant-popover-title{
+  border:'0';
+  min-width:10px
 }
 
 .blogHeader .blurSearch {
@@ -37,9 +72,13 @@
   margin:16px;
 }
 
-.blogHeader .search .ant-input {
+.blogHeader .foucsSearch .ant-input {
   background-color: transparent;
   color: #3eaf7c;
+}
+.blogHeader .blurSearch .ant-input {
+  background-color: transparent;
+  color: #fff;
 }
 
 .blogHeader .ant-input-search-icon {

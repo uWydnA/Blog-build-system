@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Input } from 'antd';
+import { Layout, Menu, Input, Button } from 'antd';
 import './navbar.css'
 import { withRouter } from 'react-router-dom';
 import {
@@ -7,7 +7,8 @@ import {
   ClockCircleOutlined,
   TagOutlined,
   HomeOutlined,
-  CommentOutlined
+  CommentOutlined,
+  // ExperimentOutlined
 
 } from '@ant-design/icons';
 const { Search } = Input;
@@ -18,13 +19,16 @@ class Navbar extends Component {
     this.props.history.push(item.key)
   }
   state = {
+    data: [],
+    findData: [],
     cataList: [],
-    isFocused:false
+    isFocused: false
   }
   componentWillMount() {
     React.$axios.get('http://localhost:12138/articles')
       .then(res => {
         this.setState({
+          data: res.data,
           cataList: [...new Set(res.data.map(val => val.category))]
         })
       })
@@ -32,15 +36,27 @@ class Navbar extends Component {
   subHandle = val => {
     this.props.history.push(`/category/${val}`)
   }
-  focusSearch =()=>{
+  focusSearch = () => {
     this.setState({
-      isFocused:true
+      isFocused: true,
     })
   }
-  blurSearch = ()=>{
+  blurSearch = () => {
     this.setState({
-      isFocused:false
+      isFocused: false,
     })
+  }
+  searchChange = value => {
+    this.setState({
+      findData: this.state.data.filter(val => {
+        if (value.target.value.length === 0) {
+          return false
+        } else {
+          return val.title.includes(value.target.value) || val.tag.includes(value.target.value) || val.category.includes(value.target.value)
+        }
+      })
+    })
+
   }
   render() {
     return (
@@ -96,16 +112,42 @@ class Navbar extends Component {
               </SubMenu>
             </Menu>
           </div>
-          <div className='search'>
+          <div className='search' id='blogSearch' style={{ overflow: 'hidden', float: 'right' }}>
             <Search
               ref='search'
               onFocus={this.focusSearch}
               onBlur={this.blurSearch}
-              onSearch={value => console.log(value)}
-              className={this.state.isFocused?'foucsSearch':'blurSearch'}
+              onChange={this.searchChange}
+              className={this.state.isFocused ? 'foucsSearch' : 'blurSearch'}
               style={{ width: 200 }}
             />
+
           </div>
+          {
+            this.state.findData.length >= 1 ?
+              <ul className='searchDemo' style={{ left: 375 }}>
+                {
+                  this.state.findData.map(val => (
+                    <li onClick={() => {
+                      this.setState({
+                        isFocused:false,
+                        findData:[]
+                      })
+                      document.querySelector(".search .ant-input").value=''
+                      this.props.history.push(`/detail/${val.category}/${val.title}`);
+                    }} key={val.title}>{val.category} > {val.title}</li>
+                  ))
+                }
+              </ul>
+              : null
+          }
+
+          {/* <div className='changeTheme'>
+            <Popover content={content} title="Choose mode" trigger="click">
+              <Button shape="circle" icon={<ExperimentOutlined />} style={{ background: 'transparent', border: '0', fontSize: '1.5rem', height: 'auto', color: '#3eaf7c' }}>
+              </Button>
+            </Popover>
+          </div> */}
         </Header>
       </div>
     )
