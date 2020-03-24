@@ -21,7 +21,7 @@ export default class BlogRouter extends Component {
                 : <Redirect to='/login'></Redirect>
             )
           }}></Route>
-          <Route path='/' render={()=>(
+          <Route path='/' render={(props)=>(
             <Blog>
               <Switch>
                 <Route path='/category/:id' component={Category}></Route>

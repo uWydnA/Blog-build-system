@@ -3,7 +3,6 @@ import Particles from 'react-particles-js'
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css'
-import axios from 'axios'
 
 export default class Login extends Component {
     render() {
@@ -51,10 +50,10 @@ export default class Login extends Component {
         )
     }
     onFinish = values => {
-      axios({
+      React.$axios({
         url: `http://localhost:12138/users?username=${values.username}&
             password=${values.password}&roleState=true`,
-        method: 'get'
+        method: 'Get'
       }).then(res => {
           if (  res.data.length )  {
 

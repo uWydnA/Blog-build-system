@@ -19,7 +19,7 @@ class Navbar extends Component {
   state = {
     cataList: []
   }
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     React.$axios.get('http://localhost:12138/articles')
       .then(res => {
         this.setState({
