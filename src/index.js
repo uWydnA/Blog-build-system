@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import App from './App';
+import SetUp from './Setup';
 import axios from 'axios'
 import * as serviceWorker from './serviceWorker';
 React.$axios = axios
+React.$isLoading = true
 ReactDOM.render(
-    <App />,
+    <SetUp />,
   document.getElementById('root')
 );
 

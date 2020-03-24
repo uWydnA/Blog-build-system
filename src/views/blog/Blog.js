@@ -3,21 +3,27 @@ import { Layout } from 'antd';
 import Navbar from './navbar/Navbar'
 import './Blog.css'
 import Home from './home/Home'
-import Loading from '../loading/Loading'
+import {connect} from 'react-redux'
 
-export default class Blog extends Component {
+class Blog extends Component {
   
   render() {
     return (
-      <div style={{height:'100%'}}>
+      <div style={{height:'100%',display:this.props.isLoading?'none':'block'}}>
         <Layout className="layout" style={{height:'100%'}}>
           <Navbar></Navbar>
           {
             this.props.children
           }
         </Layout>
-        <Loading></Loading>
       </div>
     )
   }
 }
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
+
+export default connect(mapStateToProps)(Blog)
