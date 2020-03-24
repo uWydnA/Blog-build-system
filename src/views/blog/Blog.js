@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import Navbar from './navbar/Navbar'
 import './Blog.css'
 import Home from './home/Home'
+import Loading from '../loading/Loading'
+
 export default class Blog extends Component {
   
   render() {
@@ -14,6 +16,7 @@ export default class Blog extends Component {
             this.props.children
           }
         </Layout>
+        <Loading></Loading>
       </div>
     )
   }
