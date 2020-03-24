@@ -3,7 +3,7 @@
 	margin:0em;
 	padding:0em;
 }
-a {
+.loader a {
   background: #13A3A5;
   padding: 5px;
   margin: 10px;
@@ -16,16 +16,7 @@ a {
   font-size: 18px;
   color: white
 }
-body { 
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	background: #403833;
-	font-family: 'Open Sans';
-	font-weight: 100;
-	color:#f2f2f2;
-	font-size:100%;
-	margin:0em;
-	padding:0em;
-}
+
 
 /* Start the loader code, first, let's align it the center of screen */
 .loader {
@@ -49,7 +40,7 @@ body {
 }
 
 /* Text align it the center of screen and connect the looped animation for 2 seconds */
-.text{
+.loader .text{
 	position: absolute;
 	left: -1.3em;
 	top: -1.7em;
@@ -62,7 +53,7 @@ body {
 }
 
 /* Set for the first layer vertical position */
-.vertical{
+.loader .vertical{
 	position:absolute;
 	top: -1.84em;
 	left: -0.4em;
@@ -74,7 +65,7 @@ body {
 }
 
 /* Set for the second layer horizontal position */
-.horizontal{
+.loader .horizontal{
 	position:absolute;
 	top:0em;
 	left:0em;
@@ -86,7 +77,7 @@ body {
 }
 
 /* The next two classes do mirror for animation */
-.circlesup{
+.loader .circlesup{
 	position:absolute;
 	top: -4.7em;
 	right: 12.1em;

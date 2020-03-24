@@ -3,7 +3,7 @@ import './Loading.css'
 export default class Loading extends Component {
     render() {
         return (
-            <div className="loader">
+            <div className="loader" style={{background:'#202124'}}>
                 <div className="text">Loading...</div>
                 <div className="horizontal">
                     <div className="circlesup">
