@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import ToTOP from '../totop/toTOP'
 import { Timeline } from 'antd'
 import './timeline.css'
-export default class TimeLine extends Component {
+class TimeLine extends Component {
 
   componentDidMount() {
     React.$axios.get("http://localhost:12138/articles").then(res => {
@@ -10,13 +11,18 @@ export default class TimeLine extends Component {
       res.data.map(item => {
         arr.push(item.time.split("-")[0])
       })
+      var newarr = []
+      newarr = [...new Set(arr)]
       this.setState({
-        year: [...new Set(arr)]
+        year: newarr.sort((a, b) => {
+          return b - a
+        })
       })
+
+
+
       var list = []
       for (var i in this.state.year) {
-        // console.log(res.data.filter(item => item.time.split("-")[0] === this.state.year[i]));
-
         list.push({
           inDex: this.state.year[i],
           list: res.data.filter(item => item.time.split("-")[0] === this.state.year[i]).sort(function (a, b) {
@@ -30,8 +36,8 @@ export default class TimeLine extends Component {
     })
   }
 
-  handletiao = (id) => {
-    console.log(id);
+  handletiao = (data) => {
+    this.props.history.push(`/detail/${data.category}/${data.title}`)
   }
 
 
@@ -55,8 +61,8 @@ export default class TimeLine extends Component {
                 </Timeline.Item>
                 {
                   item.list.map(data =>
-                    <Timeline.Item color="black" className="word" key={data.id} onMouseOver={this.onmouseover}>
-                      <a className="putong" style={{ padding: "10px" }} onClick={() => { this.handletiao(data.id) }}>
+                    <Timeline.Item color="red" className="word" key={data.id} onMouseOver={this.onmouseover}>
+                      <a className="putong" style={{ padding: "10px" }} onClick={() => { this.handletiao(data) }}>
                         <span style={{ paddingRight: "15px", fontSize: "12px" }}>{data.time.substring(5)}</span>
                         <span>{data.title}</span>
                       </a>
@@ -73,4 +79,4 @@ export default class TimeLine extends Component {
   }
 }
 
-
+export default withRouter(TimeLine)
