@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import ToTOP from '../totop/toTOP'
 import { Timeline } from 'antd'
+import { connect } from 'react-redux'
 import './timeline.css'
 class TimeLine extends Component {
-
   componentDidMount() {
     React.$axios.get("http://localhost:12138/articles").then(res => {
       var arr = []
@@ -19,8 +19,6 @@ class TimeLine extends Component {
         })
       })
 
-
-
       var list = []
       for (var i in this.state.year) {
         list.push({
@@ -32,13 +30,22 @@ class TimeLine extends Component {
       }
       this.setState({
         datalist: list
+      }, () => {
+        this.props.actionCreator(false)
       })
     })
   }
 
-  handletiao = (data) => {
-    this.props.history.push(`/detail/${data.category}/${data.title}`)
+  componentWillUnmount() {
+    this.props.actionCreator(true)
+
   }
+
+  // handletiao = (data) => {
+  //   // console.log(data);
+  //   this.props.history.push(`/detail/${data.category}/${data.title}`)
+  // }
+
 
 
   state = {
@@ -62,7 +69,11 @@ class TimeLine extends Component {
                 {
                   item.list.map(data =>
                     <Timeline.Item color="red" className="word" key={data.id} onMouseOver={this.onmouseover}>
-                      <a className="putong" style={{ padding: "10px" }} onClick={() => { this.handletiao(data) }}>
+                      <a className="putong" style={{ padding: "10px" }}
+                        onClick={() => {
+                          this.props.history.push(`/detail/${data.category}/${data.title}`)
+                        }}
+                      >
                         <span style={{ paddingRight: "15px", fontSize: "12px" }}>{data.time.substring(5)}</span>
                         <span>{data.title}</span>
                       </a>
@@ -79,4 +90,22 @@ class TimeLine extends Component {
   }
 }
 
-export default withRouter(TimeLine)
+
+const mapStateToProps = state => {
+  return {
+    isLoading: state.isLoading
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator: (data) => {
+    return {
+      type: 'loading',
+      payload: data
+    }
+  }
+}
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TimeLine));
+export default connect(mapStateToProps, mapDispatchToProps)(TimeLine)
+
