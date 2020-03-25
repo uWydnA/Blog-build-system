@@ -6,8 +6,9 @@ import {
     ClockCircleOutlined
 } from '@ant-design/icons'
 import { Pagination } from 'antd'
+import { List } from 'antd'
 
-export default class List extends Component {
+export default class TagList extends Component {
     state = {
         dataList: [],
         currentData: [],
@@ -36,23 +37,40 @@ export default class List extends Component {
     }
 
     render() {
+        const IconText = ({ icon, text }) => (
+            <span>
+              {React.createElement(icon, { style: { marginRight: 8 } })}
+              {text}
+            </span>
+        )
         return (
             <div id='box'>
-                {
-                    this.state.currentData.map( (val,index) => {
-                        return <div key={ index }>
-                                    <h3>{ val.title }</h3>
-                                    <div>
-                                        <UserOutlined />
-                                        <span>{ val.author }</span>
-                                        <ClockCircleOutlined />
-                                        <span>{ val.time }</span>
-                                        <TagOutlined />
-                                        <span>{ val.tag }</span>
-                                    </div>
-                                </div>
-                    })
-                }
+                <List
+                  itemLayout="vertical"
+                  size="large"
+                  dataSource={this.state.currentData}
+                  renderItem={item => (
+                    <List.Item
+                      key={item.title}
+                      actions={[
+                        <IconText icon={UserOutlined} text={item.author} key="list-vertical-star-o" />,
+                        <IconText icon={ClockCircleOutlined} text={item.time} key="list-vertical-like-o" />,
+                        <div className='goTag'>
+                          <TagOutlined/>
+                          &nbsp;  
+                          <span>{item.tag}</span>
+                        </div>
+                      ]}
+                    >
+                      <List.Item.Meta
+                      onClick={()=>{
+                        this.props.history.push(`/detail/${item.category}/${item.title}`)
+                      }}
+                        title={<a href={item.href}>{item.title}></a>}
+                      />
+                    </List.Item>
+                  )}
+                />
                 <Pagination showQuickJumper hideOnSinglePage defaultCurrent={this.state.currentPage} 
                 total={this.state.dataList.length/this.state.num*10} onChange={this.onChange}/>
             </div>

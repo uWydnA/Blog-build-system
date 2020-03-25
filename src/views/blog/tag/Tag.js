@@ -13,30 +13,36 @@ export default class Tagpage extends Component {
   }
 
   componentDidMount () {
+    
     axios('http://localhost:12138/articles').then( res => {
       this.setState({ 
         dataList: res.data,
+      })
+      res.data.forEach((val, index) => {
+        if (val.tag === this.props.location.pathname.split('/')[2]) {
+          this.setState({ 
+            currentTag: index + 1
+          })
+        }
       })
     })
   }
 
   getRomdomColor = () => {
-    let r = Math.floor(Math.random()*211)
-    let g = Math.floor(Math.random()*211)
-    let b = Math.floor(Math.random()*211)
-    return `rgb(${ r }, ${ g }, ${ b })`
+    let colorTag = ['#F8B26A', '#E15B64', "#67CC86", "#3498DB","rgb(132, 155, 135)"]
+    return colorTag[Math.round(Math.random()*(0-4)+4)]
   }
 
   render() {
     return (
-      <div>
+      <div style={{ background: '#202124'}}>
           <ul>
           {
             [{tag: '全部'}, ...this.state.dataList].map( (val, index) => <li key={ index }>
               { val.tag }
               <Tag color={ this.getRomdomColor() }
               onClick={ () => { this.handelStyle(index, val.tag)} }
-              className={this.state.currentTag===index?'tag clickTag':'tag'}>{ val.tag }</Tag>
+              className={this.state.currentTag===index?'myTag clickTag':'myTag'}>{ val.tag }</Tag>
             </li> ) 
           }
           </ul>
@@ -44,7 +50,7 @@ export default class Tagpage extends Component {
               {
                 this.props.location.pathname === '/tag'?
 
-                <List articalList={ this.state.dataList }></List>
+                <List articalList={ this.state.dataList } {...this.props}></List>
                 :
                 <Route path='/tag/:mytag' component={Tags}></Route>
               }       

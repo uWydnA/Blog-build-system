@@ -26,6 +26,6 @@ export default class Tags extends Component {
     }
 
     render() {
-        return <List articalList={ this.state.dataList }></List>
+        return <List articalList={ this.state.dataList } {...this.props}></List>
     }
 }

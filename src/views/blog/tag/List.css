@@ -1,0 +1,68 @@
+.ant-list-item-meta-title>a {
+    color: #3eaf7c !important;
+    font-size: 1.2rem !important;
+}
+.anticon{
+    color: #888 !important;
+}
+
+  
+.ant-list-item:hover {
+    box-shadow: 0 0 20px #000;
+}
+
+.ant-list-item{
+    box-shadow: 0 0 5px #000;
+    border: none !important;
+    margin: 0 auto 20px;
+    padding: 16px 20px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: .25rem;
+    transition: all .3s;
+}  
+
+.ant-pagination-item-link {
+    background-color: #202124!important;
+    box-shadow: 0 0 5px #000;
+    border: 0!important;
+    color: #fff;
+    font-weight: 600;
+}
+  
+.ant-pagination-item {
+    background-color: #202124!important;
+    box-shadow: 0 0 5px #000;
+    border: 0;
+    font-weight: 600;
+}
+
+.ant-pagination-item a {
+    color: #fff!important;
+}
+  
+.ant-pagination-options-quick-jumper{
+    background-color: #202124!important;
+    box-shadow: 0 0 5px #000;
+    padding: 0 5px;
+    border: 0;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+.ant-pagination-options-quick-jumper>input{
+    padding: 0;
+    border: 0;
+    text-align: center;
+    color: #3eaf7c;
+} 
+.ant-list-item-action>li>span {
+    color: #888!important;
+
+}
+
+.goTag{
+    color: #888 
+}
+.goTag:hover{
+    color:#3eaf7c
+}
