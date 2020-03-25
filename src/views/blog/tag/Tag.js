@@ -5,19 +5,33 @@ import './Tag.css'
 import axios from 'axios'
 import List from './List'
 import Tags from './Tags'
+import { connect } from 'react-redux'
+import Totop from '../totop/toTOP'
 
-export default class Tagpage extends Component {
+class Tagpage extends Component {
   state = {
     dataList: [],
+    TagList: [],
     currentTag: 0
   }
-
+  //筛选去重
+  deReapt = (data) => {
+    let arr = []
+    data.forEach(val => {
+      //去掉首位空格再加入数组
+      arr.push(val.tag.trim())
+    })
+    return Array.from(new Set(arr))
+  }
   componentDidMount () {
-    
-    axios('http://localhost:12138/articles').then( res => {
+    axios('http://localhost:12138/articles').then( res => {  
       this.setState({ 
         dataList: res.data,
+        TagList: this.deReapt(res.data)
+      }, () => {
+        this.props.actionCreator()
       })
+
       res.data.forEach((val, index) => {
         if (val.tag === this.props.location.pathname.split('/')[2]) {
           this.setState({ 
@@ -35,14 +49,14 @@ export default class Tagpage extends Component {
 
   render() {
     return (
-      <div style={{ background: '#202124'}}>
-          <ul>
+      <div style={{ background: '#202124', height: '1034px'}}>
+          <ul className='tagBox'>
           {
-            [{tag: '全部'}, ...this.state.dataList].map( (val, index) => <li key={ index }>
-              { val.tag }
+            ['全部', ...this.state.TagList].map( (val, index) => <li key={ index } className='tagLi'>
+              { val }
               <Tag color={ this.getRomdomColor() }
-              onClick={ () => { this.handelStyle(index, val.tag)} }
-              className={this.state.currentTag===index?'myTag clickTag':'myTag'}>{ val.tag }</Tag>
+              onClick={ () => { this.handelStyle(index, val)} }
+              className={this.state.currentTag===index?'myTag clickTag':'myTag'}>{ val }</Tag>
             </li> ) 
           }
           </ul>
@@ -55,6 +69,7 @@ export default class Tagpage extends Component {
                 <Route path='/tag/:mytag' component={Tags}></Route>
               }       
           </div>
+          <Totop/>
       </div>
     )
   }
@@ -71,3 +86,20 @@ export default class Tagpage extends Component {
     }   
   }
 }
+
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : ()=>{
+    return {
+      type:'loading',
+      payload:false
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Tagpage)

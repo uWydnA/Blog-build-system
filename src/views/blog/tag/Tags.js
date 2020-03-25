@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import List from './List'
 import axios from 'axios'
+// import { connect } from 'react-redux'
 
 export default class Tags extends Component {
     state = {
@@ -12,6 +13,8 @@ export default class Tags extends Component {
         .then( res => {
             this.setState({ 
                 dataList: res.data
+            }, () => {
+                // this.props.actionCreator()
             })
         })
     }
@@ -21,11 +24,30 @@ export default class Tags extends Component {
         .then( res => {
             this.setState({ 
                 dataList: res.data
+            }, () => {
+                // this.props.actionCreator()
             })
         })
     }
 
     render() {
-        return <List articalList={ this.state.dataList } {...this.props}></List>
+        return  <List articalList={ this.state.dataList } {...this.props}></List>      
     }
 }
+
+// const mapStateToProps = state=>{
+//     return {
+//       isLoading:state.isLoading
+//     }
+//   }
+  
+//   const mapDispatchToProps = {
+//     actionCreator : ()=>{
+//       return {
+//         type:'loading',
+//         payload:false
+//       }
+//     }
+//   }
+  
+//   export default connect(mapStateToProps,mapDispatchToProps)(Tags)

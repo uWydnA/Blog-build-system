@@ -12,7 +12,7 @@ export default class TagList extends Component {
     state = {
         dataList: [],
         currentData: [],
-        num: 5,
+        num: 6,
         currentPage: 1
     }
 
@@ -46,30 +46,30 @@ export default class TagList extends Component {
         return (
             <div id='box'>
                 <List
-                  itemLayout="vertical"
-                  size="large"
-                  dataSource={this.state.currentData}
-                  renderItem={item => (
+                itemLayout="vertical"
+                size="large"
+                dataSource={this.state.currentData}
+                renderItem={item => (
                     <List.Item
-                      key={item.title}
-                      actions={[
+                    key={item.title}
+                    actions={[
                         <IconText icon={UserOutlined} text={item.author} key="list-vertical-star-o" />,
                         <IconText icon={ClockCircleOutlined} text={item.time} key="list-vertical-like-o" />,
                         <div className='goTag'>
-                          <TagOutlined/>
-                          &nbsp;  
-                          <span>{item.tag}</span>
+                        <TagOutlined/>
+                        &nbsp;  
+                        <span>{item.tag}</span>
                         </div>
-                      ]}
+                    ]}
                     >
-                      <List.Item.Meta
-                      onClick={()=>{
+                    <List.Item.Meta
+                    onClick={()=>{
                         this.props.history.push(`/detail/${item.category}/${item.title}`)
-                      }}
-                        title={<a href={item.href}>{item.title}></a>}
-                      />
+                    }}
+                        title={<a href={item.href}>{item.title}</a>}
+                    />
                     </List.Item>
-                  )}
+                )}                
                 />
                 <Pagination showQuickJumper hideOnSinglePage defaultCurrent={this.state.currentPage} 
                 total={this.state.dataList.length/this.state.num*10} onChange={this.onChange}/>

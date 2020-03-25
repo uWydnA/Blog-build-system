@@ -1,11 +1,11 @@
-ul{
+ul.tagBox{
     width: 740px;
     margin: 30px auto;
     padding: 10px;
     text-align:center;
     overflow: hidden;
 }
-li{
+li.tagLi{
     list-style: none;
     position: relative;
     float: left;
