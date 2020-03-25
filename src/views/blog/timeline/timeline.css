@@ -6,16 +6,17 @@
 }
 
 
-.ant-timeline{
+
+.box .ant-timeline{
     padding-bottom: 30px;
 }
 
-.ant-timeline-item-tail{
+.box .ant-timeline-item-tail{
     border-left: 4px solid black;
     opacity: .3;
 }
 
-.ant-timeline-item-head{
+.box .ant-timeline-item-head{
     background: #202124;
     /* background: black; */
     width: 9px;
@@ -26,14 +27,14 @@
     left: 1px; 
 }
 
-.word{
+.box .word{
     color: #888;
     font-size: 16px;
     line-height: 30px;
     margin-top: -5px;
 }
 
-.head{
+.box .head{
     color: white;
     font-size: 16px;
     padding-top: 12px;
@@ -45,14 +46,15 @@ Timeline.Item{
     color: #888;
 }
 
-.te{
+.box .te{
     color:white !important;
     font-weight: 700;
     font-size: 26px;
+
     /* display: block; */
 }
 
-.putong{
+.box .putong{
     text-decoration: none; 
     line-height: 30px;
     color: #888;
@@ -63,10 +65,10 @@ Timeline.Item{
     width: 720px;
 }
 
-a:hover {
+.box a:hover {
     color:#3eaf7c
 }
-.ant-timeline-item-content{
+.box .ant-timeline-item-content{
 
     top: -21px;
 }

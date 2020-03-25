@@ -2,17 +2,49 @@ import React, { Component } from 'react'
 import './right.css'
 import { Table, Tag, Button, Modal, Select, Form } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
+import store from '../../../../redux/store'
+
 const { Option } = Select
 export default class Right extends Component {
 
+  actionCreate = () => {
+    return (dispatch) => {
+      React.$axios.get("http://localhost:12138/rights").then(res => {
+        dispatch({
+          type: 'right',
+          payload: res.data
+        })
+      })
+    }
+  }
+
   componentDidMount() {
-    React.$axios.get("http://localhost:12138/rights").then(res => {
-      // console.log(res.data);
+    if (store.getState().rightList.length === 0) {
+      store.dispatch(this.actionCreate())
+    } else {
       this.setState({
-        data: res.data
+        data: store.getState().rightList
+      })
+    }
+    this.unscribe = store.subscribe(() => {
+      this.setState({
+        data: store.getState().rightList
       })
     })
   }
+  componentWillUnmount() {
+    this.unscribe();
+  }
+
+
+  // componentDidMount() {
+  //   React.$axios.get("http://localhost:12138/rights").then(res => {
+  //     // console.log(res.data);
+  //     this.setState({
+  //       data: res.data
+  //     })
+  //   })
+  // }
 
   state = {
     myGrade: '',
