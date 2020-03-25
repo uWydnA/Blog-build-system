@@ -14,6 +14,10 @@ class Home extends Component {
     taglist: []
   }
   UNSAFE_componentWillMount() {
+    React.$axios.get('http://www.yolandy.com/api/users')
+    .then(res=>{
+      console.log(res)
+    })
     React.$axios.get('http://localhost:12138/articles')
       .then(res => {
         this.setState({
