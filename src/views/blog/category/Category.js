@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { List, Menu, Tag } from 'antd';
 import { UserOutlined, FieldTimeOutlined, TagFilled } from '@ant-design/icons';
 import './category.css'
+import {connect} from 'react-redux'
 class Category extends Component {
 
   state = {
     articleList: [],
     articleAll: [],
-    newList: {},
-    color: "#f50"
+    newList: {}
   }
 
   render() {
+    const colorTag = ['#F8B26A', '#E15B64', "#67CC86", "#3498DB"]
     return (
       <div id='category'>
         <div className='margin'>
@@ -20,7 +21,7 @@ class Category extends Component {
             <Menu
               className="ul"
               theme="dark"
-              style={{ backgroundColor: `rgba(24, 24, 24)` }}
+              style={{ backgroundColor: `#202124` }}
               selectedKeys={this.props.location.pathname}
             >
               {
@@ -34,7 +35,7 @@ class Category extends Component {
                         <div className="fff">
                           <span>{key}</span>
                           <Tag className='number'
-                            color={this.state.color}
+                            color={colorTag[parseInt(Math.random() * 4)]}
                           >
                             {this.state.newList[key]}
                           </Tag>
@@ -52,15 +53,15 @@ class Category extends Component {
               split={false}
               dataSource={this.state.articleList}
               pagination={{
-                pageSize: 1,
+                pageSize: 4,
                 hideOnSinglePage: true
               }}
               renderItem={item => {
                 return (<List.Item
                   style={{ borderBottom: "none" }}
                 >
-                  <div className="content" key={item.id}>
-                    <div className='title'>
+                  <div className="Fucontent" key={item.id}>
+                    <div className='Futitle'>
                       <a onClick={() => this.handleChange(item.title)}>{item.title}</a>
                     </div>
                     <hr className="hr"></hr>
@@ -93,8 +94,9 @@ class Category extends Component {
 
   // 点击title跳转详情页
   handleChange = (title) => {
-    console.log(title)
-    console.log(this.props.match.params.id)
+    // console.log(title)
+    // console.log(this.props.match.params.id)
+    this.props.history.push(`/detail/${this.props.match.params.id}/${title}`)
     // this.props.history.push(`/views/${this.props.match.params.id}/${title}`)
   }
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
@@ -140,20 +142,12 @@ class Category extends Component {
         articleList: res.data.filter(item =>
           item.category === this.props.match.params.id
         )
+      },()=>{
+        // 取消loading效果
+        this.props.actionCreator()
       })
       this.fu(res.data)
     })
-  }
-
-  // 随机颜色
-  color = () => {
-    var rand = Math.floor(Math.random() * 0xFFFFFF).toString(16)
-    if (rand.length === 6) {
-      return `#${rand}`;
-    } else {
-      return this.color();
-    }
-    
   }
 
   // 点击标签切换对应内容
@@ -161,12 +155,25 @@ class Category extends Component {
     this.setState({
       articleList: this.state.articleAll.filter(item =>
         item.category === data
-      ),
-      color:this.color()
+      )
     })
     this.props.history.push(`/category/${data}`)
   }
 
 }
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
 
-export default Category
+const mapDispatchToProps = {
+  actionCreator : ()=>{
+    return {
+      type:'loading',
+      payload:false
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Category);
