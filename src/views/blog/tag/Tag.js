@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Tag } from 'antd'
-import './Tag.css'
+import './tag.css'
 import axios from 'axios'
 import List from './List'
 import Tags from './Tags'
