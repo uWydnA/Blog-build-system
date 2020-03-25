@@ -11,7 +11,7 @@ const reducer = combineReducers({
   roleList:roleReducer,
   rightList:rightReducer,
   blogList:blogDataReducer,
-  userList:userReducer
+  userList:userReducer,
 })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,/* preloadedState, */ composeEnhancers(applyMiddleware(ReduxThunk,ReduxPromise)))

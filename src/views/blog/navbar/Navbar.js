@@ -10,6 +10,7 @@ import {
   CommentOutlined
 
 } from '@ant-design/icons';
+
 const { Header } = Layout;
 const { SubMenu } = Menu;
 class Navbar extends Component {
@@ -26,6 +27,7 @@ class Navbar extends Component {
           cataList: [...new Set(res.data.map(val => val.category))]
         })
       })
+
   }
   subHandle = val=>{
     this.props.history.push(`/category/${val}`)
@@ -43,7 +45,10 @@ class Navbar extends Component {
               mode="horizontal"
               className='blogMenu'
               defaultSelectedKeys={['/home']}
+              // 当前选中的菜单项 key 数组
+              selectedKeys={this.props.location.pathname}
               style={{ background: '#202124', fontWeight: '500', fontSize: '.9rem' }}
+              
             >
               <Menu.Item key="/home" onClick={this.handleClick}>
                 <HomeOutlined />
@@ -54,12 +59,18 @@ class Navbar extends Component {
                   <span className="submenu-title-wrapper">
                     <AppstoreOutlined />
                     category
-            </span>
+                  </span>
                 }
               >
                 {
                   this.state.cataList.map(val => (
-                    <Menu.Item key={val} onClick={this.subHandle.bind(this,val)}>{val}</Menu.Item>
+                    <Menu.Item 
+                      key={val} 
+                      onClick={this.subHandle.bind(this, val)}
+                      
+                      >
+                        {val}
+                    </Menu.Item>
                   ))
                 }
               </SubMenu>
