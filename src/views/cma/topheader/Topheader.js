@@ -56,7 +56,8 @@ class Topheader extends Component {
           <div style={ {float:'right',padding:'0 10px'} }>
               欢迎{this.state.users.username}回来！
               <Dropdown overlay={ this.menu() }>
-                  <Avatar size="large" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3705382457,1208323352&fm=26&gp=0.jpg" />
+                  <Avatar size="large" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585021049123&di=fb679643cac9ae0b8b1edffa61bdf2c1&
+                  imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180414%2F5fd4bd19639842c884d48b37d43a2eea.jpeg" />
               </Dropdown>
           </div>
       </Header>

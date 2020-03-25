@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Tag, Button } from 'antd';
+import { Table, Button } from 'antd';
 import {
   EyeOutlined,
   EditOutlined,

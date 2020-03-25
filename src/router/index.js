@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
 import Blog from "../views/blog/Blog"
 import Cma from '../views/cma/Cma'
 import Login from '../views/login/Login'
@@ -8,7 +9,7 @@ import Home from '../views/blog/home/Home'
 import Detail from '../views/blog/detail/Detail'
 import Tag from '../views/blog/tag/Tag'
 import Timeline from '../views/blog/timeline/Timeline'
-export default class BlogRouter extends Component {
+class BlogRouter extends Component {
   render() {
     return (
       <Router>
@@ -21,7 +22,7 @@ export default class BlogRouter extends Component {
                 : <Redirect to='/login'></Redirect>
             )
           }}></Route>
-          <Route path='/' render={()=>(
+          <Route path='/' render={(props)=>(
             <Blog>
               <Switch>
                 <Route path='/category/:id' component={Category}></Route>
@@ -38,3 +39,19 @@ export default class BlogRouter extends Component {
     )
   }
 }
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : ()=>{
+    return {
+      type:'loading',
+      payload:false
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(BlogRouter);

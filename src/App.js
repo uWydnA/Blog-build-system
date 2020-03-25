@@ -1,16 +1,30 @@
-import React from 'react';
+import React,{Component} from 'react';
 import BlogRouter from './router/index'
-import { Provider } from 'react-redux'
-import store from './redux/store'
+import {connect} from 'react-redux'
+import Loading from './views/loading/Loading'
 import './App.css';
-function App() {
-  return (
-    <div className="App" style={{ height: '100%' }}>
-      <Provider store={store}>
+class App extends Component {
+  render() {
+    return (
+      <div className="App" style={{ height: '100%' }}>
+        {
+          this.props.isLoading ?
+            <div style={{position:'absolute',zIndex:'1111',width:'100%',height:'100%',background:'#202124'}}>
+              <Loading />
+            </div>
+            :
+            null
+        }
         <BlogRouter></BlogRouter>
-      </Provider>
-    </div>
-  );
+      </div>
+    );
+  }
+
+}
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

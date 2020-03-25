@@ -1,0 +1,33 @@
+var express = require('express');
+var router = express.Router();
+var sql = require("./../sql/index")
+var User = require('../sql/col/users')
+var uuid = require('node-uuid')
+/**
+ * @api {get} /api/users 登录接口
+ * @apiDescription 登录接口
+ * @apiGroup users
+ * @apiParam {string} tel 手机号码
+ * @apiParam {string} password 手机号码
+ * @apiSuccessExample {json} Success-response:
+ *  res.send({
+        code:'10808',
+        message:'用户还未注册'
+    })
+    res.send({
+        code:'10000',
+        message:'密码错误'
+    })
+     res.send({
+      code:'10888',
+      message:"登录成功"
+    })
+  *  @apiSampleRequest /api/users
+  *  @apiVersion 1.0.0
+ */
+router.get('/api/users', function(req, res, next) {
+ 
+});
+
+
+module.exports = router;

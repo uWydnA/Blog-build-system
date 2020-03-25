@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
-import {NavLink, withRouter} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import {connect} from 'react-redux'
 import menu from '../../../router/menu'
 const {SubMenu} = Menu
 const { Sider } = Layout;
 class Sidebar extends Component {
+  state={
+    menulist:[],
+    roleType:''
+  }
   componentWillMount() {
     this.setState({
-      menulist: menu.superAdmin
+      menulist: menu.superAdmin,
+      roleType:JSON.parse(decodeURIComponent(atob(localStorage.getItem('users')))).roleType
     })
-    React.$axios.get("http://localhost:12138/")
   }
   showList = (data) => {
     return data.map((val, index) => (
@@ -25,7 +29,7 @@ class Sidebar extends Component {
           }
         >
           {
-            this.showList(val.children.filter(val => val.roleType <= 3))//this.state.roleType
+            this.showList(val.children.filter(val => val.roleType <= this.state.roleType))
           }
         </SubMenu>
         :
@@ -44,7 +48,7 @@ class Sidebar extends Component {
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultOpenKeys={['/' + this.props.location.pathname.split('/')[1] + '/' + this.props.location.pathname.split('/')[2]]} selectedKeys={[this.props.location.pathname]}>
           {
-            this.showList(this.state.menulist)
+            this.showList(this.state.menulist.filter(val => val.roleType <= this.state.roleType))
           }
         </Menu>
       </Sider>
