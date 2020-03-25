@@ -7,7 +7,7 @@ const schema = new Schema({
   username:{type:String},
   password:{type:String},
   roleName:{type:String},
-  roleState:{type:Number},
+  roleState:{type:Boolean},
   default:{type:Boolean},
   roleType:{type:Number}//1:小编 2：管理员 3：超级管理员
 })
