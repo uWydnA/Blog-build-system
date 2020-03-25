@@ -29,11 +29,11 @@ export default class Cardbar extends Component {
             description={
               <div className='cardDes'>
                 <div className='left'>
-                  <div className='cardDesnum'>77</div>
+                  <div className='cardDesnum'>{this.props.data.length}</div>
                   <div className='cardDesArt'>文章</div>
                 </div>
                 <div className='right'>
-                  <div className='cardDesnum'>55</div>
+                  <div className='cardDesnum'>{this.props.catelist.length?this.props.catelist.map(val=>val.num).reduce((prev,inow)=>prev+inow):null}</div>
                   <div className='cardDesArt'>标签</div>
                 </div>
               </div>}

@@ -4,9 +4,10 @@ import Banner from '../banner/Banner'
 import './home.css'
 import { TagOutlined, ClockCircleOutlined, UserOutlined, AppstoreFilled, TagFilled } from '@ant-design/icons';
 import Cardbar from '../cardbar/Cardbar'
+import {connect} from 'react-redux'
 const { Content, Footer } = Layout;
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     data: [],
     catelist: [],
@@ -29,6 +30,8 @@ export default class Home extends Component {
           })
           this.setState({
             catelist: newarr
+          },()=>{
+            this.props.actionCreator()
           })
         })
       })
@@ -45,7 +48,7 @@ export default class Home extends Component {
     );
     const colorTag = ['#F8B26A', '#E15B64', "#67CC86", "#3498DB"]
     return (
-      <Layout className="layoutHome" style={{ height: '100%', color: '#fff', display: 'block' }}>
+      <Layout className="layoutHome" style={{ height: '100%', color: '#fff', display: 'block',visibility:this.props.isLoading ?'hidden':'visible' }}>
         <Banner></Banner>
         <Content style={{ padding: '0 50px', background: '#202124', height: 'auto', minHeight: 'auto' }}>
           <div className="site-layout-content" style={{ background: '#202124' }}>
@@ -86,7 +89,7 @@ export default class Home extends Component {
               </Col>
               <Col span={8}>
                 <div className='carbar'>
-                  <Cardbar></Cardbar>
+                  <Cardbar data={this.state.data} catelist={this.state.catelist}></Cardbar>
                   <div className='catagory'>
                     <AppstoreFilled />
                     <span style={{ marginLeft: '5px' }}>分类</span>
@@ -124,3 +127,21 @@ export default class Home extends Component {
     )
   }
 }
+
+
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : ()=>{
+    return {
+      type:'loading',
+      payload:false
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
