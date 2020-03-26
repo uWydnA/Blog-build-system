@@ -23,7 +23,6 @@ class Topheader extends Component {
   }
   componentDidMount () {
     let users = localStorage.getItem('users')
-    console.log(JSON.parse(decodeURIComponent(window.atob(users))))
     this.setState({
       users: JSON.parse(decodeURIComponent(window.atob(users)))
     })
