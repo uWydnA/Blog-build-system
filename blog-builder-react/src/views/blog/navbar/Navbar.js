@@ -71,6 +71,8 @@ class Navbar extends Component {
               mode="horizontal"
               className='blogMenu'
               defaultSelectedKeys={['/home']}
+              // 当前选中的菜单项 key 数组
+              selectedKeys={this.props.location.pathname}
               style={{ background: '#202124', fontWeight: '500', fontSize: '.9rem' }}
             >
               <Menu.Item key="/home" onClick={this.handleClick}>
@@ -130,10 +132,10 @@ class Navbar extends Component {
                   this.state.findData.map(val => (
                     <li onClick={() => {
                       this.setState({
-                        isFocused:false,
-                        findData:[]
+                        isFocused: false,
+                        findData: []
                       })
-                      document.querySelector(".search .ant-input").value=''
+                      document.querySelector(".search .ant-input").value = ''
                       this.props.history.push(`/detail/${val.category}/${val.title}`);
                     }} key={val.title}>{val.category} > {val.title}</li>
                   ))
