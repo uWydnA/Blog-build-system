@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { List, Menu, Tag } from 'antd';
-import { UserOutlined, FieldTimeOutlined, TagFilled } from '@ant-design/icons';
+import { UserOutlined, ClockCircleOutlined, TagOutlined } from '@ant-design/icons';
 import './category.css'
 import {connect} from 'react-redux'
 import ToTOP from '../totop/toTOP'
@@ -32,7 +32,7 @@ class Category extends Component {
                     <Menu.Item key={key} onClick={() => this.handleTar(key)}
                       className="li"
                     >
-                      <a>
+                      <div>
                         <div className="fff">
                           <span>{key}</span>
                           <Tag className='number'
@@ -41,7 +41,7 @@ class Category extends Component {
                             {this.state.newList[key]}
                           </Tag>
                         </div>
-                      </a>
+                      </div>
                     </Menu.Item>
                   )
                 )
@@ -72,11 +72,11 @@ class Category extends Component {
                         <span>{item.author}</span>
                       </div>
                       <div>
-                        <FieldTimeOutlined />
+                        <ClockCircleOutlined />
                         <span>{item.time}</span>
                       </div>
                       <div>
-                        <TagFilled />
+                        <TagOutlined />
                         <span>{item.tag}</span>
                       </div>
 

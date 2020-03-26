@@ -37,7 +37,7 @@
     box-shadow: 0 0 1px 1px #888888;
 }
 #category .margin .top .ul .li:hover{
-    background:#1890ff;
+    background:rgba(62, 175, 124);
 }
 
 .li a{
@@ -56,15 +56,12 @@
 }
 .li a .number{
     display:inline-block;
-    margin-left: 4px;
     width: 20px;
     height: 20px;
     text-align: center;
     line-height: 20px;
-    border-radius: 5px;
     font-size: .7rem;
     color: #fff;
-    background: #fb9b5f;
 }
 
 .margin .contentAll .Fucontent{
@@ -146,8 +143,9 @@
     margin-top: 10px;
 }
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
-    background-color: #1890ff;
+#category .margin .top .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color: rgba(62, 175, 124);
 }
+
 
 

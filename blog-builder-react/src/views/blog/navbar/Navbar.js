@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Input } from 'antd';
+import { Layout, Menu, Input, Button } from 'antd';
 import './navbar.css'
 import { withRouter } from 'react-router-dom';
 import {
@@ -70,7 +70,7 @@ class Navbar extends Component {
               theme="light"
               mode="horizontal"
               className='blogMenu'
-              selectedKeys={[this.props.history.location.pathname]}
+              selectedKeys={this.props.history.location.pathname}
               style={{ background: '#202124', fontWeight: '500', fontSize: '.9rem' }}
             >
               <Menu.Item key="/home" onClick={this.handleClick}>
@@ -112,8 +112,7 @@ class Navbar extends Component {
               </SubMenu>
             </Menu>
           </div>
-         <div style={{position:'relative',height:'64px',float: 'right'}}>
-         <div className='search' id='blogSearch' style={{ overflow: 'hidden', float: 'right' }}>
+          <div className='search' id='blogSearch' style={{ overflow: 'hidden', float: 'right' }}>
             <Search
               ref='search'
               onFocus={this.focusSearch}
@@ -126,7 +125,7 @@ class Navbar extends Component {
           </div>
           {
             this.state.findData.length >= 1 ?
-              <ul className='searchDemo' >
+              <ul className='searchDemo' style={{ left: 375 }}>
                 {
                   this.state.findData.map(val => (
                     <li onClick={() => {
@@ -135,15 +134,13 @@ class Navbar extends Component {
                         findData:[]
                       })
                       document.querySelector(".search .ant-input").value=''
-                      this.props.history.push(`/detail/${val.category}/${val._id}`);
+                      this.props.history.push(`/detail/${val.category}/${val.title}`);
                     }} key={val.title}>{val.category} > {val.title}</li>
                   ))
                 }
               </ul>
               : null
           }
-         </div>
-        
 
           {/* <div className='changeTheme'>
             <Popover content={content} title="Choose mode" trigger="click">

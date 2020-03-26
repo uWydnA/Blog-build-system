@@ -278,10 +278,10 @@ class User extends Component {
         roleType: this.state.roleType,
         roleState: false
       }).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         // 返回的数据是新添加的数据，不包含原数据，所以需要将新添加的数据合并到原数据中，再渲染页面
         this.setState({
-          data: [...this.state.data, res.data]
+          data: [...this.state.data, res.data.data]
         })
       })
     }).catch(errorInfo => {
