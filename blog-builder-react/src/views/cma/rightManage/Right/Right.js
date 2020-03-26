@@ -105,7 +105,7 @@ export default class Right extends Component {
   }
 
   onChange = (value) => {
-    console.log(value);
+    // console.log(value);
     this.setState({
       myGrade: value
     })
