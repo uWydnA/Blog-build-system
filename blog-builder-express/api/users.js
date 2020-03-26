@@ -35,18 +35,34 @@ sql.find({
     if (data.length === 0 ){
       sql.insert({
         colName: User,
-        data: {
-          userId: 'user_' + uuid.v1(),
-          username: 'admin',
-          password: '123456',
-          roleName: '超级管理员',
-          roleState: true,
-          default: true,
-          roleType: 3
-      }})
+        data: [
+          {
+            "username": "admin",
+            "password": 123456,
+            "roleName": "超级管理员",
+            "roleState": true,
+            "default": true,
+            "roleType": 3
+          },
+          {
+            "username": "root",
+            "password": 123456,
+            "roleName": "管理员",
+            "roleState": true,
+            "default": false,
+            "roleType": 2,
+          },
+          {
+            "username": "react",
+            "password": 123456,
+            "roleName": "小编",
+            "roleState": true,
+            "default": false,
+            "roleType": 1,
+          }
+      ]})
     }
   })
-
 // router.get('/', function(req, res, next) {
 //   res.send({name:'users'})
 // });
