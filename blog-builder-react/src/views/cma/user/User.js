@@ -208,7 +208,7 @@ class User extends Component {
       }).then(res => {
         // console.log(res.data)
         var newData = this.state.data.map(item => {
-          if (item.id === this.state.userInfo.id) {
+          if (item._id === this.state.userInfo.id) {
             return res.data
           } else {
             return item
@@ -236,7 +236,7 @@ class User extends Component {
       // 重新将data赋值，渲染页面数据，filter过滤，返回为true的值
       this.setState({
         data: this.state.data.filter(item => {
-          return item.id !== id
+          return item._id !== id
         })
       })
     })
@@ -273,12 +273,12 @@ class User extends Component {
       //   values:{username: 'username',password: 'password'}
       //  每次添加数据完成后重置表单输入框为初始状态
       this.refs.AddUser.resetFields()
-      React.$axios.post('http://api.yolandy.com/api/users', {
+      React.$axios.post('http://api.yolandy.com/api/users/register', {
         ...values,
         roleType: this.state.roleType,
         roleState: false
       }).then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         // 返回的数据是新添加的数据，不包含原数据，所以需要将新添加的数据合并到原数据中，再渲染页面
         this.setState({
           data: [...this.state.data, res.data]
