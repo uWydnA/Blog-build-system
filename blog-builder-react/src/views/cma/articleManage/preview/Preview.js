@@ -4,7 +4,7 @@ import axios from 'axios'
 export default class Preview extends Component {
   UNSAFE_componentWillMount() {
     axios.get(`http://api.yolandy.com/api/articles?_id=${this.props.match.params.id}`).then(res => {
-      let { title, category, content,time } = res.data
+      let { title, category, content,time } = res.data[0]
       this.setState({
         title,
         category,
