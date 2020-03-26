@@ -55,10 +55,13 @@ export default class TagList extends Component {
                     actions={[
                         <IconText icon={UserOutlined} text={item.author} key="list-vertical-star-o" />,
                         <IconText icon={ClockCircleOutlined} text={item.time} key="list-vertical-like-o" />,
-                        <div className='goTag'>
+                        <div className='goTag'  onClick={()=>{
+                            this.props.goTag && this.props.goTag(item.tag) 
+                            this.props.history.push(`/tag/${ item.tag }`)  
+                         }}>
                         <TagOutlined/>
                         &nbsp;  
-                        <span>{item.tag}</span>
+                        <span>{ item.tag }</span>
                         </div>
                     ]}
                     >
