@@ -8,7 +8,7 @@ export default class Tags extends Component {
     }
     
     componentDidMount () {
-        axios(`http://localhost:12138/articles?tag=${ this.props.history.location.pathname.split('/')[2] }`)
+        axios.get(`http://api.yolandy.com/api/articles?tag=${ this.props.history.location.pathname.split('/')[2] }`)
         .then( res => {
             this.setState({ 
                 dataList: res.data
@@ -17,7 +17,7 @@ export default class Tags extends Component {
     }
     
     UNSAFE_componentWillReceiveProps () {
-        axios(`http://localhost:12138/articles?tag=${ this.props.history.location.pathname.split('/')[2] }`)
+        axios.get(`http://api.yolandy.com/api/articles?tag=${ this.props.history.location.pathname.split('/')[2] }`)
         .then( res => {
             this.setState({ 
                 dataList: res.data

@@ -55,16 +55,17 @@ class Login extends Component {
         )
     }
     onFinish = values => {
+      let { username, password } = values
       React.$axios({
-        url: `http://localhost:12138/users?username=${values.username}&
-            password=${values.password}&roleState=true`,
-        method: 'Get'
+        url: `http://api.yolandy.com/api/users/login?`,
+        method: 'Post',
+        data: { username, password }
       }).then(res => {
-          if (  res.data.length )  {
+          if ( res.data.code === 16888 )  {
 
             message.success('登录成功')
               
-            let user = window.btoa(encodeURIComponent(JSON.stringify(res.data[0])))
+            let user = window.btoa(encodeURIComponent(JSON.stringify(res.data.data)))
           
             // 解码：decodeURIComponent(window.atob(user))
             localStorage.setItem('users', user)
@@ -73,7 +74,7 @@ class Login extends Component {
             this.props.history.push('/cma')
 
           } else {
-            message.error('登录失败')
+            message.error( res.data.message )
           }
       })
     }

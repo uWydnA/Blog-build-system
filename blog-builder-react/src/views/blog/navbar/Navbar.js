@@ -70,7 +70,7 @@ class Navbar extends Component {
               theme="light"
               mode="horizontal"
               className='blogMenu'
-              selectedKeys={[this.props.history.location.pathname]}
+              defaultSelectedKeys={[this.props.history.location.pathname]}
               style={{ background: '#202124', fontWeight: '500', fontSize: '.9rem' }}
             >
               <Menu.Item key="/home" onClick={this.handleClick}>

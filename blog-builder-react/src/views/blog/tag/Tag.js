@@ -18,13 +18,12 @@ class Tagpage extends Component {
   deReapt = (data) => {
     let arr = []
     data.forEach(val => {
-      //去掉首位空格再加入数组
-      arr.push(val.tag.trim())
+      arr.push(val.tag)
     })
     return Array.from(new Set(arr))
   }
   componentDidMount () {
-    axios('http://localhost:12138/articles').then( res => {  
+    axios('http://api.yolandy.com/api/articles').then( res => {  
       this.setState({ 
         dataList: res.data,
         TagList: ['全部', ...this.deReapt(res.data)]
@@ -75,7 +74,6 @@ class Tagpage extends Component {
     )
   }
   handelStyle = (index, tag) => {
-    console.log(tag)
     if (this.state.currentTag !== index) {
       this.setState({
         currentTag: index
