@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import './timeline.css'
 class TimeLine extends Component {
   componentDidMount() {
-    React.$axios.get("http://localhost:12138/articles").then(res => {
+    React.$axios.get("http://api.yolandy.com/api/articles").then(res => {
       var arr = []
       res.data.map(item => {
         arr.push(item.time.split("-")[0])
@@ -68,10 +68,10 @@ class TimeLine extends Component {
                 </Timeline.Item>
                 {
                   item.list.map(data =>
-                    <Timeline.Item color="red" className="word" key={data.id} onMouseOver={this.onmouseover}>
+                    <Timeline.Item color="red" className="word" key={data._id} onMouseOver={this.onmouseover}>
                       <a className="putong" style={{ padding: "10px" }}
                         onClick={() => {
-                          this.props.history.push(`/detail/${data.category}/${data.title}`)
+                          this.props.history.push(`/detail/${data.category}/${data._id}`)
                         }}
                       >
                         <span style={{ paddingRight: "15px", fontSize: "12px" }}>{data.time.substring(5)}</span>

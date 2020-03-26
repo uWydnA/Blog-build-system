@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
 import './detail.css'
+import {connect} from 'react-redux'
 import { TagOutlined, ClockCircleOutlined, UserOutlined} from '@ant-design/icons';
-export default class Detail extends Component {
+class Detail extends Component {
   state = {
     datalist:[]
   }
   componentDidMount() {
-    React.$axios.get(`http://localhost:12138/articles?title=${this.props.match.params.id}`).then(res=>{
+    React.$axios.get(`http://api.yolandy.com/api/articles`).then(res=>{
+      var data = res.data.filter(item=>item._id === this.props.match.params.id)
+      console.log(data)
       this.setState({
-        datalist:res.data[0]
+        datalist:data[0]
+      },()=>{
+        this.props.actionCreator(false)
       })
     })
   }
-  
+  componentWillUnmount () {
+    this.props.actionCreator(true)
+  }
   render() {
     return (
       <div style={{width:"100%",height:'100%',background:' #202124',color:"#FFF"}}>
         {/* detail -- {this.props.match.params.id}--{this.props.match.params.category} */}
         <div className="wrapper">
             <div className="title">
-              <h1>{this.props.match.params.id}</h1>
+              <h1>{this.state.datalist.title}</h1>
             </div>
             <div className="details">
                 <span>
@@ -44,3 +51,18 @@ export default class Detail extends Component {
     )
   }
 }
+const mapStateToProps = state=>{
+  return {
+    isLoading:state.isLoading
+  }
+}
+
+const mapDispatchToProps = {
+  actionCreator : data=>{
+    return {
+      type:'loading',
+      payload:data
+    }
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Detail);

@@ -137,7 +137,8 @@ router.post('/update', function (req, res, next) {
   }).then(() => {
     res.send({
       code: "666",
-      message: "更新成功"
+      message: "更新成功",
+      data: req.body
     })
   })
 });
