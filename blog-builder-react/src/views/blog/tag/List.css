@@ -31,6 +31,13 @@
     font-weight: 600;
 }
 
+#blogListBox .ant-pagination-item a {
+    color: #fff
+}
+
+#blogListBox .ant-pagination-item-active a {
+    color:#3eaf7c
+}
 
 #blogListBox .ant-pagination-item {
     background-color: #202124!important;
@@ -38,11 +45,7 @@
     border: 0;
     font-weight: 600;
 }
-
-#blogListBox .ant-pagination-item a {
-    color: #fff!important;
-}
-  
+ 
 #blogListBox .ant-pagination-options-quick-jumper{
     background-color: #202124;
     box-shadow: 0 0 5px #000;
@@ -70,3 +73,4 @@
 #blogListBox .goTag:hover{
     color:#3eaf7c
 }
+

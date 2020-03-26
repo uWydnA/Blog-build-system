@@ -64,14 +64,14 @@ export default class TagList extends Component {
                     >
                     <List.Item.Meta
                     onClick={()=>{
-                        this.props.history.push(`/detail/${item.category}/${item.title}`)
+                        this.props.history.push(`/detail/${item.category}/${item._id}`)
                     }}
                         title={<a href={item.href}>{item.title}</a>}
                     />
                     </List.Item>
                 )}                
                 />
-                <Pagination showQuickJumper hideOnSinglePage defaultCurrent={this.state.currentPage} 
+                <Pagination showQuickJumper hideOnSinglePage current={this.state.currentPage} 
                 total={this.state.dataList.length/this.state.num*10} onChange={this.onChange}/>
             </div>
         )
@@ -86,7 +86,8 @@ export default class TagList extends Component {
             }
         })      
         this.setState({
-            currentData:  item
+            currentData:  item,
+            currentPage: pageNumber
         })
     }
 }

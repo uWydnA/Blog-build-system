@@ -49,7 +49,7 @@ class Tagpage extends Component {
 
   render() {
     return (
-      <div style={{ background: '#202124', height: '1034px'}}>
+      <div style={{ background: '#202124', height: '1300px'}}>
           <ul className='tagBox'>
           {
             this.state.TagList.map( (val, index) => <li key={ index } className='tagLi'>
