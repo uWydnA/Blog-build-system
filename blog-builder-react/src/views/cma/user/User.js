@@ -174,8 +174,8 @@ class User extends Component {
 
   // switch开关设置
   handleSwitch = (checked, item) => {
-    React.$axios.put(`http://localhost:12138/users/${item.id}`, {
-      ...item,
+    React.$axios.put(`http://localhost:12138/users/roleState`, {
+      _id:item.id,
       roleState: checked
     }).then(res => {
       // switch开关操作即体现在页面，只需要更改数据库对应的数据
@@ -213,10 +213,11 @@ class User extends Component {
 
     this.refs.AddUser.validateFields().then(value => {
       // value => 输入框的值
-      React.$axios.put(`http://localhost:12138/users/${this.state.userInfo.id}`, {
-        ...this.state.userInfo,
-        ...value,
-        roleType: this.state.roleType
+      React.$axios.put(`http://localhost:3000/api/users/update`, {
+          _id:this.state.userInfo.id,
+          ...this.state.userInfo,
+          ...value,
+          roleType: this.state.roleType
       }).then(res => {
         // console.log(res.data)
         var newData = this.state.data.map(item => {
@@ -240,7 +241,9 @@ class User extends Component {
   // 删除用户 ,将每条数据的唯一id传入事件中，进行ajax
   handelDelete = id => {
     // console.log(id)
-    React.$axios.delete(`http://localhost:12138/users/${id}`).then(res => {
+    React.$axios.delete(`http://localhost:12138/users`,{
+      data:{_id:id}
+    }).then(res => {
       // 返回一个空对象
       // console.log(res.data) 
       // 重新将data赋值，渲染页面数据，filter过滤，返回为true的值
