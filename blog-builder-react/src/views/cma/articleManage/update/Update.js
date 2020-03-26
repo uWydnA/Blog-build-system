@@ -10,8 +10,8 @@ export default class Update extends Component {
     React.$axios.get(`http://api.yolandy.com/api/articles?_id=${this.props.match.params.id}`)
       .then(res => {
         this.setState({
-          data: res.data,
-          content:res.data.content
+          data: res.data[0],
+          content:res.data[0].content
         },()=>{
          this.refs.updateForm.setFieldsValue(this.state.data)
         })
