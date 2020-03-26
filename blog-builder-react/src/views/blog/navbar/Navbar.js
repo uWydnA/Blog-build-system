@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Input, Button } from 'antd';
+import { Layout, Menu, Input } from 'antd';
 import './navbar.css'
 import { withRouter } from 'react-router-dom';
 import {
@@ -112,7 +112,8 @@ class Navbar extends Component {
               </SubMenu>
             </Menu>
           </div>
-          <div className='search' id='blogSearch' style={{ overflow: 'hidden', float: 'right' }}>
+         <div style={{position:'relative',height:'64px',float: 'right'}}>
+         <div className='search' id='blogSearch' style={{ overflow: 'hidden', float: 'right' }}>
             <Search
               ref='search'
               onFocus={this.focusSearch}
@@ -125,7 +126,7 @@ class Navbar extends Component {
           </div>
           {
             this.state.findData.length >= 1 ?
-              <ul className='searchDemo' style={{ left: 375 }}>
+              <ul className='searchDemo' >
                 {
                   this.state.findData.map(val => (
                     <li onClick={() => {
@@ -141,6 +142,8 @@ class Navbar extends Component {
               </ul>
               : null
           }
+         </div>
+        
 
           {/* <div className='changeTheme'>
             <Popover content={content} title="Choose mode" trigger="click">

@@ -50,13 +50,13 @@ class Cma extends Component {
               <Switch>
                 <Route path='/cma/home' component={Home}></Route>
                 {
-                  this.state.roleType >= 2 ?
+                  this.state.roleType >= 3 ?
                     <Route path='/cma/user' component={User}></Route>
                     : null
 
                 }
                 {
-                  this.state.roleType >= 3 ?
+                  this.state.roleType >= 2 ?
                     <Route path='/cma/right-manage' render={(props) => (
                       <RightManage {...props}>
                         <Switch>

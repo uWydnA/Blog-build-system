@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import img from '../../../img/wd.jpg'
-import { Card, Avatar } from 'antd';
+import { Card } from 'antd';
 // import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import './cardbar.css'
 const { Meta } = Card;

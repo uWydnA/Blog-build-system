@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './update.css'
 import { PageHeader, Steps, Button, message, Input, Form, Select } from 'antd';
 import RichEditor from '../richEditor/RichEditor'
-import CheckboxGroup from 'antd/lib/checkbox/Group';
 const { Step } = Steps;
 const { Option } = Select;
 export default class Update extends Component {
