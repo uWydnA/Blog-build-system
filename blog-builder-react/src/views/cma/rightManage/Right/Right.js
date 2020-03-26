@@ -9,14 +9,26 @@ export default class Right extends Component {
 
   actionCreate = () => {
     return (dispatch) => {
-      React.$axios.get("http://localhost:12138/rights").then(res => {
-        dispatch({
-          type: 'right',
-          payload: res.data
-        })
+      React.$axios.get("http://api.yolandy.com/api/rights").then(res => {
+        // console.log(res.data);
+        if (res.data.length === 0) {
+          React.$axios.post("http://api.yolandy.com/api/rights/zhuce").then(res => {
+            dispatch({
+              type: 'right',
+              payload: res.data
+            })
+          })
+        } else {
+          dispatch({
+            type: 'right',
+            payload: res.data
+          })
+        }
       })
     }
   }
+
+
 
   componentDidMount() {
     if (store.getState().rightList.length === 0) {
@@ -77,7 +89,7 @@ export default class Right extends Component {
         dataIndex: '',
         key: 'x',
         render: (item) => <div>
-          <Button type="primary" shape="circle" icon={<EditOutlined />} disabled={item.default} onClick={() => { this.update(item.id) }} />
+          <Button type="primary" shape="circle" icon={<EditOutlined />} disabled={item.default} onClick={() => { this.update(item._id) }} />
         </div>
       }
     ],
@@ -85,7 +97,7 @@ export default class Right extends Component {
   }
 
   update = (data) => {
-    var formdata = this.state.data.filter(item => item.id === data)
+    var formdata = this.state.data.filter(item => item._id === data)
     // console.log(formdata[0]);
     this.setState({
       formdata: formdata[0],
@@ -107,14 +119,15 @@ export default class Right extends Component {
 
   handleUpdateOk = () => {
     this.refs.updateText.validateFields().then(value => {
-      // console.log(value, this.state.formdata);
-      React.$axios.put(`http://localhost:12138/rights/${this.state.formdata.id}`, {
+      console.log(value, this.state.formdata);
+      // React.$axios.put(`http://localhost:12138/rights/${this.state.formdata.id}`, {
+      React.$axios.post(`http://api.yolandy.com/api/rights/update/`, {
         ...this.state.formdata,
         ...value
       }).then(res => {
         var newlist = this.state.data.map(item => {
-          if (item.id === this.state.formdata.id) {
-            return res.data
+          if (item._id === this.state.formdata._id) {
+            return res.data.data
           } else {
             return item
           }
