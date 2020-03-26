@@ -21,7 +21,7 @@ export default class Role extends Component {
     }
     actionCreate = () => {
         return (dispatch) => {
-            React.$axios.get("http://localhost:12138/roles").then(res => {
+            React.$axios.get("http://api.yolandy.com/api/roles").then(res => {
                 dispatch({
                     type: 'role',
                     payload: res.data
@@ -53,14 +53,14 @@ export default class Role extends Component {
                 columns={this.state.columns}
                 dataSource={this.state.datalist}
                 rowKey={item => {
-                    return item.id
+                    return item._id
                 }}
                 expandable={{
                     expandedRowRender: record => {
                         return <div style={{ margin: 0 }}>
                             {
                                 record.roleRight.map(item =>
-                                    <div key={item.category}>
+                                    <div key={item._id}>
                                         {
                                             item.list.map(data =>
                                                 <Tag color={"green"} key={data}>{data}</Tag>
