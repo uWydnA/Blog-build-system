@@ -143,8 +143,8 @@
     margin-top: 10px;
 }
 
-#category .margin .top .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
-    background-color: rgba(62, 175, 124);
+#category .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background:#202124!important;
 }
 
 

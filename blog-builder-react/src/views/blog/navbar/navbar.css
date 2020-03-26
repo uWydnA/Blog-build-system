@@ -93,9 +93,10 @@
   float: right;
 }
 
-.blogHeader  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+.ant-menu-submenu .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #202124;
 }
+
 
 .ant-menu-horizontal>.ant-menu-item:hover,
 .ant-menu-horizontal>.ant-menu-submenu:hover,

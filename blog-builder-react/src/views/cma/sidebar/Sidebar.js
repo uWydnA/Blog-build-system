@@ -3,6 +3,7 @@ import { withRouter} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import {connect} from 'react-redux'
 import menu from '../../../router/menu'
+import './sidebar.css'
 const {SubMenu} = Menu
 const { Sider } = Layout;
 class Sidebar extends Component {
