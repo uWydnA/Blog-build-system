@@ -12,7 +12,16 @@ class Tagpage extends Component {
   state = {
     dataList: [],
     TagList: [],
-    currentTag: 0
+    currentTag: 0,
+    goTag: (tag) => { 
+      this.state.TagList.forEach((val, index) => {
+        if ( val === tag ) {
+          this.setState({
+            currentTag: index
+          })
+        }
+      })
+    }
   }
   //筛选去重
   deReapt = (data) => {
@@ -64,7 +73,7 @@ class Tagpage extends Component {
               {
                 this.props.location.pathname === '/tag'?
 
-                <List articalList={ this.state.dataList } {...this.props}></List>
+                <List articalList={ this.state.dataList } {...this.props} goTag={ this.state.goTag }></List>
                 :
                 <Route path='/tag/:mytag' component={Tags}></Route>
               }       

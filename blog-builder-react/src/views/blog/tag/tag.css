@@ -20,6 +20,7 @@ li.tagLi{
     left: 0;
     top: 0;
     width: '100%';
+    cursor: pointer;
 }
 .myTag:hover{
     z-index: 2!important;

@@ -60,7 +60,7 @@ export default class Role extends Component {
                         return <div style={{ margin: 0 }}>
                             {
                                 record.roleRight.map(item =>
-                                    <div key={item._id}>
+                                    <div key={item.category}>
                                         {
                                             item.list.map(data =>
                                                 <Tag color={"green"} key={data}>{data}</Tag>
