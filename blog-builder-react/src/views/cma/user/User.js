@@ -53,7 +53,7 @@ class User extends Component {
   // }
 
   actionRole = () => {
-    return React.$axios.get('http://localhost:12138/roles').then(res => {
+    return React.$axios.get('http://api.yolandy.com/api/roles').then(res => {
         return {
           type: 'SetRoleList',
           payload: res.data
@@ -65,6 +65,8 @@ class User extends Component {
 
 
   componentDidMount(){
+
+
 
     React.$axios.get('http://localhost:12138/users').then(res => {
       // console.log(res.data)
@@ -213,7 +215,7 @@ class User extends Component {
 
     this.refs.AddUser.validateFields().then(value => {
       // value => 输入框的值
-      React.$axios.put(`http://localhost:3000/api/users/update`, {
+      React.$axios.put(`http://localhost:12138/users/update`, {
           _id:this.state.userInfo.id,
           ...this.state.userInfo,
           ...value,

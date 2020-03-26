@@ -205,4 +205,13 @@ router.put('/roleState', function (req, res, next) {
 });
 
 
+
+router.get('/', function (req, res, next) {
+  sql.find({
+    colName: User
+  }).then(data => {
+    // console.log(111)
+    res.send(data)
+  })
+});
 module.exports = router;
