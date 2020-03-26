@@ -93,7 +93,7 @@
   float: right;
 }
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+.blogHeader  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: #202124;
 }
 
