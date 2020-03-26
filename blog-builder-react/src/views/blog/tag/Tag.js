@@ -43,7 +43,7 @@ class Tagpage extends Component {
     this.props.actionCreator(true)
   }
   getRomdomColor = () => {
-    let colorTag = ['#F8B26A', '#E15B64', "#67CC86", "#3498DB","rgb(132, 155, 135)"]
+    let colorTag = ['rgb(225, 91, 100)', 'rgb(132, 155, 135)', "rgb(242, 109, 109)","rgb(103, 204, 134)",'rgb(52, 152, 219)']
     return colorTag[Math.round(Math.random()*(0-4)+4)]
   }
 
