@@ -63,7 +63,7 @@ class Category extends Component {
                 >
                   <div className="Fucontent" key={item.id}>
                     <div className='Futitle'>
-                      <a onClick={() => this.handleChange(item.title)}>{item.title}</a>
+                      <a onClick={() => this.handleChange(item)}>{item.title}</a>
                     </div>
                     <hr className="hr"></hr>
                     <div className="info">
@@ -95,11 +95,8 @@ class Category extends Component {
 
 
   // 点击title跳转详情页
-  handleChange = (title) => {
-    // console.log(title)
-    // console.log(this.props.match.params.id)
-    this.props.history.push(`/detail/${this.props.match.params.id}/${title}`)
-    // this.props.history.push(`/views/${this.props.match.params.id}/${title}`)
+  handleChange = (item) => {
+    this.props.history.push(`/detail/${item.category}/${item._id}`)
   }
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
 
@@ -139,7 +136,7 @@ class Category extends Component {
   // 初始进入阶段
   componentDidMount() {
     React.$axios.get('http://api.yolandy.com/api/articles').then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.setState({
         articleAll: res.data,
         articleList: res.data.filter(item =>
