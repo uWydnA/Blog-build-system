@@ -10,7 +10,6 @@ export default class Right extends Component {
   actionCreate = () => {
     return (dispatch) => {
       React.$axios.get("http://api.yolandy.com/api/rights").then(res => {
-        // console.log(res.data);
         if (res.data.length === 0) {
           React.$axios.post("http://api.yolandy.com/api/rights/zhuce").then(res => {
             dispatch({
@@ -64,11 +63,6 @@ export default class Right extends Component {
     visible: false,
     columns: [
       {
-        title: '#',
-        dataIndex: 'id',
-        key: 'id',
-      },
-      {
         title: '权限名称',
         dataIndex: 'title',
         key: 'title'
@@ -111,7 +105,7 @@ export default class Right extends Component {
   }
 
   onChange = (value) => {
-    console.log(value);
+    // console.log(value);
     this.setState({
       myGrade: value
     })
@@ -119,8 +113,6 @@ export default class Right extends Component {
 
   handleUpdateOk = () => {
     this.refs.updateText.validateFields().then(value => {
-      console.log(value, this.state.formdata);
-      // React.$axios.put(`http://localhost:12138/rights/${this.state.formdata.id}`, {
       React.$axios.post(`http://api.yolandy.com/api/rights/update/`, {
         ...this.state.formdata,
         ...value
@@ -136,6 +128,7 @@ export default class Right extends Component {
           visible: false,
           data: newlist
         })
+        store.getState().rightList = newlist
       })
     })
   }

@@ -65,7 +65,7 @@ Timeline.Item{
     width: 720px;
 }
 
-.box a:hover {
+.box .putong:hover {
     color:#3eaf7c
 }
 .box .ant-timeline-item-content{

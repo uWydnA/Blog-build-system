@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, List, Avatar, Card, Tag } from 'antd';
+import { Layout, Row, Col, List, Card, Tag } from 'antd';
 import Banner from '../banner/Banner'
 import './home.css'
 import { TagOutlined, ClockCircleOutlined, UserOutlined, AppstoreFilled, TagFilled } from '@ant-design/icons';
