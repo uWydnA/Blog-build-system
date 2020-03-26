@@ -135,7 +135,7 @@ class Navbar extends Component {
                         findData:[]
                       })
                       document.querySelector(".search .ant-input").value=''
-                      this.props.history.push(`/detail/${val.category}/${val.title}`);
+                      this.props.history.push(`/detail/${val.category}/${val._id}`);
                     }} key={val.title}>{val.category} > {val.title}</li>
                   ))
                 }
