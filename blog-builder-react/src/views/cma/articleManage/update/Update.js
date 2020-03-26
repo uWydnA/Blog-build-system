@@ -16,7 +16,7 @@ export default class Update extends Component {
          this.refs.updateForm.setFieldsValue(this.state.data)
         })
       })
-    React.$axios.get(`http://localhost:12138/categories`)
+    React.$axios.get(`http://api.yolandy.com/api/category`)
       .then(res => {
         this.setState({
           categoryist: res.data
