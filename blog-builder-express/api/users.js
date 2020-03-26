@@ -166,4 +166,60 @@ sql.find({
   })
 });
 
+// 删除用户接口,对象data:{_id:id} =》req.body
+router.delete('/', function (req, res, next) {
+  sql.delete({
+    colName: User,
+    where: req.body
+  }).then(() => {
+    res.send({
+      code: 10086,
+      message: 'delete ok'
+    });
+  })
+});
+
+// 更新用户信息接口
+router.put('/update', function (req, res, next) {
+  sql.update({
+    colName: User,
+    where: {
+      _id: req.body._id
+    },
+    newdata: req.body
+  }).then(() => {
+    res.send({
+      code: 10087,
+      message: 'user update ok'
+    })
+  })
+});
+
+// 更新用户roleState状态接口
+
+router.put('/roleState', function (req, res, next) {
+  sql.update({
+    colName: User,
+    where: {
+      _id: req.body._id
+    },
+    newdata: req.body
+  }).then(() => {
+    res.send({
+      code: 10088,
+      message: 'roleState update ok'
+    })
+  })
+});
+
+
+
+router.get('/', function (req, res, next) {
+  sql.find({
+    colName: User
+  }).then(data => {
+    // console.log(111)
+    res.send(data)
+  })
+});
 module.exports = router;

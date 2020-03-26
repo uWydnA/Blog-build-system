@@ -122,9 +122,9 @@
 .ant-pagination-item a{
     font-weight: 700;
 }
-svg{
+/* svg{
     margin-top: 10px;
-}
+} */
 /* .margin .contentAll .content .title a::after{
     content: "";
     position: absolute;
