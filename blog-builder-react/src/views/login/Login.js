@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import './Login.css'
 
 class Login extends Component {
-  componentWillMount () {
+  componentDidMount () {
     this.props.actionCreator(false)
   }
   componentWillUnmount () {
