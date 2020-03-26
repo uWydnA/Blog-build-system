@@ -17,7 +17,9 @@ class Home extends Component {
     React.$axios.get('http://api.yolandy.com/api/articles')
       .then(res => {
         this.setState({
-          data: res.data,
+          data: res.data.sort((a,b)=>{
+            return b.time.split('-').join('') - a.time.split('-').join('') 
+          }),
           taglist: [...new Set(res.data.map(val => val.tag))]
         }, () => {
           let newarr = [...new Set(this.state.data.map(val => val.category))].map(val => ({ category: val }))
@@ -61,9 +63,6 @@ class Home extends Component {
                   itemLayout="vertical"
                   size="large"
                   pagination={{
-                    onChange: page => {
-                      console.log(page);
-                    },
                     pageSize: 10,
                   }}
                   dataSource={this.state.data}

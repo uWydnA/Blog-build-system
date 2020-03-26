@@ -192,8 +192,8 @@ sql.find({
 })
 
 router.get('/', function (req, res, next) {
- const {_id} = req.query
- if(_id===undefined){
+ const {_id,tag} = req.query
+ if(_id===undefined && tag === undefined){
   sql.find({
     colName: Articles,
   })
@@ -203,10 +203,10 @@ router.get('/', function (req, res, next) {
  }else{
   sql.find({
     colName: Articles,
-    where:{_id:_id}
+    where:req.query
   })
     .then(data => {
-      res.send(data[0])
+      res.send(data)
     })
  }
 });

@@ -2,6 +2,7 @@
 
 # dependencies
 /blog-builder-react/node_modules
+/blog-builder-react/build
 /.pnp
 .pnp.js
 /blog-builder-express/node_modules
