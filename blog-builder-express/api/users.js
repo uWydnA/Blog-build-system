@@ -142,10 +142,18 @@ sql.find({
           default:Boolean,
           roleType
         }
-      }).then(()=>{
+      }).then( () =>{
           res.send({
             code: 16888, 
-            message:'用户创建成功'
+            message:'用户创建成功',
+            data: {
+              username,
+              password,
+              roleName,
+              roleState,
+              default:Boolean,
+              roleType
+            }
           })
       })
       // 有，用户名已注册
