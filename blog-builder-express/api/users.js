@@ -25,12 +25,50 @@ var uuid = require('node-uuid')
   *  @apiSampleRequest /api/users
   *  @apiVersion 1.0.0
  */
-router.get('/', function(req, res, next) {
-  res.send({name:'users'})
-});
 
+// 启动项目初始化创建一位默认超级管理员
+sql.find({
+  colName: User,
+  where: {
+    username: 'admin'
+  }}).then(data => {
+    if (data.length === 0 ){
+      sql.insert({
+        colName: User,
+        data: [
+          {
+            "username": "admin",
+            "password": 123456,
+            "roleName": "超级管理员",
+            "roleState": true,
+            "default": true,
+            "roleType": 3
+          },
+          {
+            "username": "root",
+            "password": 123456,
+            "roleName": "管理员",
+            "roleState": true,
+            "default": false,
+            "roleType": 2,
+          },
+          {
+            "username": "react",
+            "password": 123456,
+            "roleName": "小编",
+            "roleState": true,
+            "default": false,
+            "roleType": 1,
+          }
+      ]})
+    }
+  })
+// router.get('/', function(req, res, next) {
+//   res.send({name:'users'})
+// });
+// 登录接口
 router.post('/login', function(req, res, next) {
-
+  
   const { username, password } = req.body
   //判断用户名是否存在
   sql.find({
@@ -43,7 +81,7 @@ router.post('/login', function(req, res, next) {
     if (data.length === 0) {
       res.send({
         code: 10805,
-        message: '用户名未注册'
+        message: '用户名未创建'
       })
     } else {
       //存在，判断密码是否正确
@@ -81,6 +119,7 @@ router.post('/login', function(req, res, next) {
   })
 });
 
+// 注册接口
 router.post('/register', function(req, res, next) {
 
 const { username, password, roleName, roleState, default:Boolean, roleType } = req.body
@@ -96,7 +135,6 @@ sql.find({
       sql.insert({
         colName: User,
         data: {
-          userId: 'user_' + uuid.v1(),
           username,
           password,
           roleName,
@@ -107,14 +145,14 @@ sql.find({
       }).then(()=>{
           res.send({
             code: 16888, 
-            message:'注册成功'
+            message:'用户创建成功'
           })
       })
       // 有，用户名已注册
     } else {
         res.send({
           code: 10606,
-          message: '用户名已注册'
+          message: '用户名重复'
         })
     }
   })

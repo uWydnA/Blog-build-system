@@ -25,7 +25,7 @@ class Navbar extends Component {
     isFocused: false
   }
   UNSAFE_componentWillMount() {
-    React.$axios.get('http://localhost:12138/articles')
+    React.$axios.get('http://api.yolandy.com/api/articles')
       .then(res => {
         this.setState({
           data: res.data,
