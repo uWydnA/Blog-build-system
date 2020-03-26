@@ -26,9 +26,9 @@ class User extends Component {
         render: item => {
           return (
             <div>
-              <Button type="primary" icon={<FormOutlined />} shape="circle" disabled={item.default} onClick={() => this.handleUpdate(item.id)}></Button>
+              <Button type="primary" icon={<FormOutlined />} shape="circle" disabled={item.default} onClick={() => this.handleUpdate(item._id)}></Button>
                             &nbsp;
-              <Button type="danger" icon={<DeleteOutlined />} shape="circle" disabled={item.default} onClick={() => this.handelDelete(item.id)}></Button>
+              <Button type="danger" icon={<DeleteOutlined />} shape="circle" disabled={item.default} onClick={() => this.handelDelete(item._id)}></Button>
             </div>
           )
         }
@@ -68,29 +68,12 @@ class User extends Component {
 
 
 
-    React.$axios.get('http://localhost:12138/users').then(res => {
+    React.$axios.get('http://api.yolandy.com/api/users').then(res => {
       // console.log(res.data)
       this.setState({
           data: res.data
       })
   })
-
-
-    // if (store.getState().userList.SetUserList.length === 0) {
-    //   store.dispatch(this.actionUser()).then(
-    //     data => {
-    //       // console.log(data)
-    //       this.setState({
-    //         data: store.getState().userList.SetUserList
-    //       })
-    //     })
-    // } else {
-    //   console.log("SetUserList使用缓存")
-    //   this.setState({
-    //     data: store.getState().userList.SetUserList
-    //   })
-    // }
-
 
 
     // 请求角色名称，
@@ -119,7 +102,8 @@ class User extends Component {
           dataSource={this.state.data}
           pagination={{ pageSize: this.state.pageNumber }}
           rowKey={item => {
-            return item.id
+            // console.log(item)
+            return `${item.id}1`
           }} //设置key值
         />
         <Modal
@@ -163,7 +147,8 @@ class User extends Component {
                 {/* 从数据库取的数据动态渲染角色列表 */}
                 {
                   this.state.roleList.map(item => {
-                    return <Option value={item.roleName} key={item.id}>{item.roleName}</Option>
+                    // console.log(item)
+                    return <Option value={item.roleName} key={item.roleName}>{item.roleName}</Option>
                   })
                 }
               </Select>
@@ -176,7 +161,7 @@ class User extends Component {
 
   // switch开关设置
   handleSwitch = (checked, item) => {
-    React.$axios.put(`http://localhost:12138/users/roleState`, {
+    React.$axios.put(`http://api.yolandy.com/api/users/roleState`, {
       _id:item.id,
       roleState: checked
     }).then(res => {
@@ -194,8 +179,8 @@ class User extends Component {
       ADDorUPDATE: false,
       // 将信息状态设置为true显示
       visible: true,
-      userInfo: this.state.data.filter(item => (item.id === id))[0],
-      roleType: this.state.data.filter(item => (item.id === id))[0].roleType
+      userInfo: this.state.data.filter(item => (item._id === id))[0],
+      roleType: this.state.data.filter(item => (item._id === id))[0].roleType
     }, () => {
       // 设置延时器将异步请求改变成同步请求
       var { username, password, roleName } = this.state.userInfo
@@ -215,7 +200,7 @@ class User extends Component {
 
     this.refs.AddUser.validateFields().then(value => {
       // value => 输入框的值
-      React.$axios.put(`http://localhost:12138/users/update`, {
+      React.$axios.put(`http://api.yolandy.com/api/users/update`, {
           _id:this.state.userInfo.id,
           ...this.state.userInfo,
           ...value,
@@ -243,7 +228,7 @@ class User extends Component {
   // 删除用户 ,将每条数据的唯一id传入事件中，进行ajax
   handelDelete = id => {
     // console.log(id)
-    React.$axios.delete(`http://localhost:12138/users`,{
+    React.$axios.delete(`http://api.yolandy.com/api/users`,{
       data:{_id:id}
     }).then(res => {
       // 返回一个空对象
@@ -288,7 +273,7 @@ class User extends Component {
       //   values:{username: 'username',password: 'password'}
       //  每次添加数据完成后重置表单输入框为初始状态
       this.refs.AddUser.resetFields()
-      React.$axios.post('http://localhost:12138/users', {
+      React.$axios.post('http://api.yolandy.com/api/users', {
         ...values,
         roleType: this.state.roleType,
         roleState: false
