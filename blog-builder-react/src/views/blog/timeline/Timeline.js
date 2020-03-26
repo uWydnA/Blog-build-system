@@ -68,7 +68,7 @@ class TimeLine extends Component {
                 </Timeline.Item>
                 {
                   item.list.map(data =>
-                    <Timeline.Item color="red" className="word" key={data.id} onMouseOver={this.onmouseover}>
+                    <Timeline.Item color="red" className="word" key={data._id} onMouseOver={this.onmouseover}>
                       <a className="putong" style={{ padding: "10px" }}
                         onClick={() => {
                           this.props.history.push(`/detail/${data.category}/${data._id}`)
